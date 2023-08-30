@@ -1,5 +1,5 @@
-# SER515
-SER515 Project
+# SER515 Project
+
 
 #### Team
 Kirtan Soni
