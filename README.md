@@ -2,8 +2,8 @@
 
 
 #### Team
-Kirtan Soni
-Shubham Shah
-Samit Shah
-Monil Prajapati
+- Kirtan Soni
+- Shubham Shah
+- Samit Shah
+- Monil Prajapati
 
