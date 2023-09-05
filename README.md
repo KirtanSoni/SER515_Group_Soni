@@ -4,6 +4,6 @@
 #### Team
 - Kirtan Soni
 - Shubham Shah
-- Samit Shah
 - Monil Prajapati
-
+- Janmay Bhatt
+- Neel Shah
