@@ -5,6 +5,6 @@ Java GUI tool Kit: Swing
 #### Team
 - Kirtan Soni
 - Shubham Shah
-- Monil Prajapati
+- Monil Prajapati (PULL and PUSH done)
 - Janmay Bhatt
 - Neel Shah
