@@ -7,7 +7,7 @@ public class UserStory {
     private String AcceptanceCriteria;
     private String BusinessValue;
     private String DeveloperValue;
-    UserStory(String Title, String Description, String AcceptanceCriteria, String BusinessValue, String DeveloperValue){
+    public UserStory(String Title, String Description, String AcceptanceCriteria, String BusinessValue, String DeveloperValue){
         this.Title = Title;
         this.Description = Description;
         this.AcceptanceCriteria = AcceptanceCriteria;
