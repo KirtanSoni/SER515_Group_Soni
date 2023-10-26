@@ -4,7 +4,10 @@ import org.classes.ProductBacklog;
 import org.classes.UserStory;
 public class ProductBacklogTests {
     public ProductBacklogTests(){
-        ProductBacklog productBacklog = new ProductBacklog();
+       objTest();
+    }
+    void objTest(){
+         ProductBacklog productBacklog = new ProductBacklog();
         assert productBacklog.getUserStories().size() == 0;
 
         //creating 3 user stories
@@ -33,5 +36,6 @@ public class ProductBacklogTests {
 
         
         System.out.println("ProductBacklogTests passed!");
+
     }
 }
