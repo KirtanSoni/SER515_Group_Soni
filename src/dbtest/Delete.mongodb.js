@@ -1,0 +1,1 @@
+db.ScrumSimulatorSER515.deleteMany({species:"Dog"})
