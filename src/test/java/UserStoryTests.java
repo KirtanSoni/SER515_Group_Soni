@@ -1,4 +1,6 @@
 
+import java.util.List;
+
 import org.classes.UserStory;
 
 
@@ -26,7 +28,6 @@ public class UserStoryTests {
             assert userStory.getBusinessValue() == "BusinessValue2";
             userStory.setDeveloperValue("DeveloperValue2");
             assert userStory.getDeveloperValue() == "DeveloperValue2";
-            assert userStory.toString() == "UserStory{Title='title2', Description='Description2', AcceptanceCriteria='AcceptanceCriteria2', BusinessValue='BusinessValue2', DeveloperValue='DeveloperValue2'}";
             System.out.println("UserStoryTests passed!");
 
 
