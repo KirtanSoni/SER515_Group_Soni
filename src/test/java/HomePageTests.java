@@ -11,7 +11,7 @@ public class HomePageTests {
             HomePage nw = new HomePage();
             nw.setVisible(true);
             if(nw.isVisible()== true) {
-                System.out.println("HomePageTests passed");
+                System.out.println("HomePageTests passed!");
                 Thread.sleep(1000);
             }
             nw.setVisible(false);
