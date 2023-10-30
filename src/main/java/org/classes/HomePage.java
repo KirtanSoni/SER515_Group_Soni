@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.Dimension;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class HomePage extends JFrame {
 
@@ -61,13 +63,10 @@ public class HomePage extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
-        contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("SprintMeta");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 30));
-        lblNewLabel.setBounds(269, 122, 186, 47);
-        contentPane.add(lblNewLabel);
 
         JButton btnProductBacklogButton = new JButton("Product Backlog");
         btnProductBacklogButton.addActionListener(new ActionListener() {
@@ -76,8 +75,6 @@ public class HomePage extends JFrame {
             }
         });
         btnProductBacklogButton.setFont(new Font("Calibri", Font.BOLD, 18));
-        btnProductBacklogButton.setBounds(71, 236, 171, 47);
-        contentPane.add(btnProductBacklogButton);
 
         JButton btnDailyScrum = new JButton("Daily Scrum");
         btnDailyScrum.addActionListener(new ActionListener() {
@@ -86,8 +83,6 @@ public class HomePage extends JFrame {
             }
         });
         btnDailyScrum.setFont(new Font("Calibri", Font.BOLD, 18));
-        btnDailyScrum.setBounds(273, 236, 171, 47);
-        contentPane.add(btnDailyScrum);
 
         JButton btnSprintBacklog = new JButton("Sprint Backlog");
         btnSprintBacklog.addActionListener(new ActionListener() {
@@ -96,9 +91,37 @@ public class HomePage extends JFrame {
             }
         });
         btnSprintBacklog.setFont(new Font("Calibri", Font.BOLD, 18));
-        btnSprintBacklog.setBounds(468, 236, 171, 47);
-        contentPane.add(btnSprintBacklog);
+        GroupLayout gl_contentPane = new GroupLayout(contentPane);
+        gl_contentPane.setHorizontalGroup(
+                gl_contentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(264)
+                                .addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                .addGap(259))
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(66)
+                                .addComponent(btnProductBacklogButton, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addGap(31)
+                                .addComponent(btnDailyScrum, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addGap(24)
+                                .addComponent(btnSprintBacklog, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addGap(75))
+        );
+        gl_contentPane.setVerticalGroup(
+                gl_contentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(117)
+                                .addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                                .addGap(67)
+                                .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(btnProductBacklogButton, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                                        .addComponent(btnDailyScrum, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                                        .addComponent(btnSprintBacklog, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                                .addGap(159))
+        );
+        contentPane.setLayout(gl_contentPane);
 
     }
 
 }
+
