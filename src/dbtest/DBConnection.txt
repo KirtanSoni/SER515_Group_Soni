@@ -1,0 +1,13 @@
+To connect the project to the database follow the steps
+1. For IntelliJ
+a. Open database tab on the right panel.
+b. Add new connection by clicking on "+" sign.
+c. Select MongoDB database and directly add the connecting string in the URL part.
+d. Connection string is: "mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/" .
+e. You have successfully connected the database to our project.
+
+2. For VS Code
+a. Download MongoDB for VS Code extension.
+b. After installing, click on "I have a connection string".
+c. Connection string is: "mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/" .
+d. You have successfully connected the database to our project.
