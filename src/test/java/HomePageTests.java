@@ -1,4 +1,4 @@
-package org.classes;
+import org.classes.HomePage;
 
 public class HomePageTests {
     public HomePageTests() {
