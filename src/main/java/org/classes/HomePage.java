@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -67,17 +69,32 @@ public class HomePage extends JFrame {
         lblNewLabel.setBounds(269, 122, 186, 47);
         contentPane.add(lblNewLabel);
 
-        JButton btnNewButton = new JButton("Product Backlog");
-        btnNewButton.setFont(new Font("Calibri", Font.BOLD, 18));
-        btnNewButton.setBounds(71, 236, 171, 47);
-        contentPane.add(btnNewButton);
+        JButton btnProductBacklogButton = new JButton("Product Backlog");
+        btnProductBacklogButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(btnProductBacklogButton, "Under Development");
+            }
+        });
+        btnProductBacklogButton.setFont(new Font("Calibri", Font.BOLD, 18));
+        btnProductBacklogButton.setBounds(71, 236, 171, 47);
+        contentPane.add(btnProductBacklogButton);
 
         JButton btnDailyScrum = new JButton("Daily Scrum");
+        btnDailyScrum.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(btnDailyScrum, "Under Development");
+            }
+        });
         btnDailyScrum.setFont(new Font("Calibri", Font.BOLD, 18));
         btnDailyScrum.setBounds(273, 236, 171, 47);
         contentPane.add(btnDailyScrum);
 
         JButton btnSprintBacklog = new JButton("Sprint Backlog");
+        btnSprintBacklog.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(btnSprintBacklog, "Under Development");
+            }
+        });
         btnSprintBacklog.setFont(new Font("Calibri", Font.BOLD, 18));
         btnSprintBacklog.setBounds(468, 236, 171, 47);
         contentPane.add(btnSprintBacklog);
