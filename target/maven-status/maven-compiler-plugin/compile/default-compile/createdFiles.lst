@@ -1,0 +1,9 @@
+com\mongodb\quickstart\Create.class
+com\mongodb\quickstart\Read.class
+org\Main.class
+com\mongodb\quickstart\Delete.class
+com\mongodb\quickstart\Update.class
+com\mongodb\quickstart\Connection.class
+org\classes\UserStory.class
+org\classes\ProductBacklog.class
+com\mongodb\quickstart\HelloMongoDB.class

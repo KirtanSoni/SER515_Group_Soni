@@ -1,0 +1,5 @@
+# Created at 2023-10-30T22:43:31.037
+Boot Manifest-JAR contains absolute paths in classpath 'D:\SER515_Group_Soni\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
