@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 
 public class User {
     private String username;
@@ -56,5 +58,23 @@ public class UserManagement {
             }
         }
         return null; // User not found
+    }
+    
+    public boolean authenticateUserUsername(String username, String password) {
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true; // Credentials match
+            }
+        }
+        return false; // Authentication failed
+    }
+
+    public boolean authenticateUserEmail(String email, String password) {
+        for (User user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return true; // Credentials match
+            }
+        }
+        return false; // Authentication failed
     }
 }
