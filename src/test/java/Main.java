@@ -5,6 +5,7 @@ public class Main {
          UserStoryTests userStoryTests = new UserStoryTests();
          ProductBacklogTests productBacklogTests = new ProductBacklogTests();
          HomePageTests homePageTests = new HomePageTests();
+         AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
 
     }
 
