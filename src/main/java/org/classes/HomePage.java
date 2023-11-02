@@ -57,6 +57,7 @@ public class HomePage extends JFrame {
     public HomePage() {
         setTitle("Home Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setBounds(100, 100, 733, 484);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
@@ -66,7 +67,7 @@ public class HomePage extends JFrame {
 
         JLabel lblNewLabel = new JLabel("SprintMeta");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 30));
+        lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 36));
 
         JButton btnProductBacklogButton = new JButton("Product Backlog");
         btnProductBacklogButton.addActionListener(new ActionListener() {
