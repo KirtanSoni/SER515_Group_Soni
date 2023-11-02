@@ -19,6 +19,20 @@ public class ProductBacklog {
     public List<UserStory> getUserStories(){
         return this.userStories;
     }
+    
+    //Get UserStories by ids
+    public List<UserStory> getUserStories(List<Integer> ids){
+        List<UserStory> userStories = new ArrayList<UserStory>();
+        for(int id : ids){
+            userStories.add(UserStory.getUserStory(this.userStories, id));
+        }
+        return userStories;
+    }
+
+    //Get UserStory by id
+    public UserStory getUserStory(int id){
+        return UserStory.getUserStory(this.userStories, id);
+    }
 
     //Set UserStories
     public void setUserStories(List<UserStory> userStories){
@@ -44,15 +58,11 @@ public class ProductBacklog {
     public void removeUserStory(int index){
         this.userStories.remove(index);
     }
-
-    //update UserStory
-    public void updateUserStory(int index, UserStory userStory){
-        this.userStories.set(index, userStory);
-    }
-    public void updateUserStory(UserStory oldUserStory, UserStory newUserStory){
-        this.userStories.set(this.userStories.indexOf(oldUserStory), newUserStory);
+    public void removeUserStory(List<UserStory> userStories){
+        this.userStories.removeAll(userStories);
     }
     
+   
     //toString
     @Override
     public String toString() {
