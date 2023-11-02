@@ -9,11 +9,12 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelperTest {
+public class HelperTest implements ITest {
     public HelperTest(){
         test();
         System.out.println("HelperTest passed!");
     }
+@Override
     public void test(){
         UserStory userStory = new UserStory("title1", "Description1", "AcceptanceCriteria1", 3, 4);
         UserStory userStory2 = new UserStory("title2", "Description2", "AcceptanceCriteria2", 4, 5);

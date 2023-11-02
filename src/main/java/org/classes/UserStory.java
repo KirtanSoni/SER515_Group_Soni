@@ -11,6 +11,9 @@ public class UserStory {
     private String AcceptanceCriteria;
     private int BusinessValue;
     private int DeveloperValue;
+
+
+// constructors --------------------------------------------------------
     public UserStory(String title, String description, String acceptanceCriteria, int businessValue, int developerValue){
         this.id = _COUNTER+1;
         _COUNTER++;
@@ -22,7 +25,7 @@ public class UserStory {
         this.DeveloperValue = developerValue;
     }
 
-    // Getters
+// Getters ---------------------------------------------------------
     public int getId(){
         return this.id;
     }
@@ -44,7 +47,6 @@ public class UserStory {
     }
 
     // Static getter Methods
-
     static public UserStory getUserStory(List<UserStory> userStories, int id){
         for(UserStory userStory : userStories){
             if(userStory.getId() == id){
@@ -54,9 +56,8 @@ public class UserStory {
         return null;
     }
 
-
-    // Setters
-    public void setStatus(Status status) { this.status = status; }
+// Setters ---------------------------------------------------------
+    public void setStatus(Status status) { this.status = status;}
     public void setTitle(String title){
         this.Title = title;
     }
@@ -73,7 +74,7 @@ public class UserStory {
         this.DeveloperValue = developerValue;
     }
 
-    //edit UserStory
+//edit UserStory ---------------------------------------------------------
     public void editUserStory(String title, String description, String acceptanceCriteria, int businessValue, int developerValue){
         this.Title = title;
         this.Description = description;
@@ -87,9 +88,7 @@ public class UserStory {
     public void editUserStoryDescription(String description){
         this.Description = description;
     }
-    public void editUserStoryAcceptanceCriteria(String acceptanceCriteria){
-        this.AcceptanceCriteria = acceptanceCriteria;
-    }
+    public void editUserStoryAcceptanceCriteria(String acceptanceCriteria){ this.AcceptanceCriteria = acceptanceCriteria; }
     public void editUserStoryBusinessValue(int businessValue){
         this.BusinessValue = businessValue;
     }
@@ -97,7 +96,11 @@ public class UserStory {
         this.DeveloperValue = developerValue;
     }
 
-    // toString - Debugging
+
+
+
+
+    // toString - Debugging ---------------------------------------------------------
     @Override
     public String toString() {
         return "UserStory{" +

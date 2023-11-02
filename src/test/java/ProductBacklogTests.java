@@ -4,11 +4,12 @@ import java.util.List;
 import src.main.java.org.classes.ProductBacklog;
 import src.main.java.org.classes.UserStory;
 
-public class ProductBacklogTests {
+public class ProductBacklogTests implements ITest{
     public ProductBacklogTests(){
-       objTest();
+       test();
     }
-    void objTest(){
+    @Override
+    public void test(){
          ProductBacklog productBacklog = new ProductBacklog();
         assert productBacklog.getUserStories().isEmpty();
 

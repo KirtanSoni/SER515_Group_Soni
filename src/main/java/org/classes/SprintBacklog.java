@@ -51,8 +51,22 @@ public class SprintBacklog {
         }
         return totalDeveloperValue;
     }
+// Update Status
+    public void updateStatus(int id, Status status)
+    {
+        UserStory userStory = UserStory.getUserStory(this.sprintBacklog, id);
+        userStory.setStatus(status);
+    }
 // progress
-
+    public int getProgress(){
+        int progress = 0;
+        for(UserStory userStory : this.sprintBacklog){
+            if(userStory.getStatus() == Status.DONE){
+                progress += userStory.getDeveloperValue();
+            }
+        }
+        return progress*100/this.getTotalDeveloperValue();
+    }
 // Get UserStory by id
     public UserStory getUserStory(int id){
        return UserStory.getUserStory(this.sprintBacklog, id);

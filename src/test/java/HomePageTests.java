@@ -2,12 +2,13 @@ package src.test.java;
 
 import src.main.java.org.classes.HomePage;
 import java.awt.EventQueue;
-public class HomePageTests {
+public class HomePageTests implements ITest{
     public HomePageTests() {
-        testHomePage();
+        test();
     }
 
-    void testHomePage() {
+    @Override
+    public void test() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

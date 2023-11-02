@@ -4,11 +4,13 @@ import src.main.java.org.classes.UserStory;
 
 import java.util.Objects;
 
-public class UserStoryTests{
+public class UserStoryTests implements ITest{
     public UserStoryTests(){
-        testUserStory();
+        test();
     }
-    void testUserStory(){
+
+    @Override
+    public void test(){
         try {
             
             UserStory userStory = new UserStory("title1", "Description1", "AcceptanceCriteria1", 3, 4);
