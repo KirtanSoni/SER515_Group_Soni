@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@scrumsimulator.nuu1fks.mongodb.net" uuid="83a130cc-7244-4cc0-a3c3-5a038615fa56">
+    <data-source source="LOCAL" name="@scrumsimulator.nuu1fks.mongodb.net" uuid="03e4c961-a62e-4fac-b77e-2920b9526e95">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
