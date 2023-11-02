@@ -1,4 +1,6 @@
-import org.classes.HomePage;
+package src.test.java;
+
+import src.main.java.org.classes.HomePage;
 import java.awt.EventQueue;
 public class HomePageTests {
     public HomePageTests() {
@@ -25,12 +27,12 @@ public class HomePageTests {
         });
     }
 
-    public static void main(String[] args) {
+    // public static void main(String[] args) {
 
-        HomePageTests homePageTests = new HomePageTests();
-
-
+    //     HomePageTests homePageTests = new HomePageTests();
 
 
-    }
+
+
+    // }
 }

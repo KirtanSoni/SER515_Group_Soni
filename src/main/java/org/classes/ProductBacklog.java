@@ -1,4 +1,4 @@
-package org.classes;
+package src.main.java.org.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class ProductBacklog {
     private List<UserStory> userStories;
 
 
-    //contructors
+//constructors
     public ProductBacklog(){
         this.userStories = new ArrayList<UserStory>();
     }
@@ -15,12 +15,12 @@ public class ProductBacklog {
         this.userStories = userStories;
     }
 
-    //Get UserStories   
+//Get UserStories----------------------------------------------------
     public List<UserStory> getUserStories(){
         return this.userStories;
     }
     
-    //Get UserStories by ids
+//Get UserStories by ids---------------------------------------------
     public List<UserStory> getUserStories(List<Integer> ids){
         List<UserStory> userStories = new ArrayList<UserStory>();
         for(int id : ids){
@@ -29,17 +29,17 @@ public class ProductBacklog {
         return userStories;
     }
 
-    //Get UserStory by id
+//Get UserStory by id-------------------------------------------------
     public UserStory getUserStory(int id){
         return UserStory.getUserStory(this.userStories, id);
     }
 
-    //Set UserStories
+//Set UserStories-----------------------------------------------------
     public void setUserStories(List<UserStory> userStories){
         this.userStories = userStories;
     }
 
-    //Add UserStory
+//Add UserStory-------------------------------------------------------
     public void addUserStory(UserStory userStory){
         this.userStories.add(userStory);
     }
@@ -51,7 +51,7 @@ public class ProductBacklog {
     }
 
 
-    //Remove UserStory
+//Remove UserStory----------------------------------------------------
     public void removeUserStory(UserStory userStory){
         this.userStories.remove(userStory);
     }
