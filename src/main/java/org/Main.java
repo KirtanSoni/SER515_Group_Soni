@@ -1,5 +1,3 @@
-package org;
-
 public class Main {
     public static void main(String[] args) {
         // Create a UserManagement instance
@@ -29,4 +27,3 @@ public class Main {
         System.out.println("All test cases passed.");
     }
 }
-
