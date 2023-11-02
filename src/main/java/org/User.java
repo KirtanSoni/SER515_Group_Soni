@@ -1,80 +1,63 @@
-import java.util.ArrayList;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 
-public class User {
-    private String username;
+class User {
     private String email;
+    private String username;
     private String password;
+    private UserType userType;
 
-    public User(String username, String email, String password) {
-        this.username = username;
+    public User(String email, String username, String password, UserType userType) {
         this.email = email;
-        this.password = password;
+        this.username = username;
+        this.password = hashPassword(password);
+        this.userType = userType;
     }
 
-    public String getUsername() {
-        return username;
+    // Helper method to hash the password using SHA-256
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            Formatter formatter = new Formatter();
+            for (byte b : hash) {
+                formatter.format("%02x", b);
+            }
+            return formatter.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public String getPassword() {
         return password;
     }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userType=" + userType +
+                '}';
+    }
 }
 
-public class UserManagement {
-    private ArrayList<User> users;
-
-    public UserManagement() {
-        users = new ArrayList<>();
-    }
-
-    public void addUser(String username, String email, String password) {
-        User newUser = new User(username, email, password);
-        users.add(newUser);
-    }
-
-    public void deleteUser(User user) {
-        users.remove(user);
-    }
-
-    public User getUserByUsername(String username) {
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
-        }
-        return null; // User not found
-    }
-
-    public User getUserByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return user;
-            }
-        }
-        return null; // User not found
-    }
-    
-    public boolean authenticateUserUsername(String username, String password) {
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return true; // Credentials match
-            }
-        }
-        return false; // Authentication failed
-    }
-
-    public boolean authenticateUserEmail(String email, String password) {
-        for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return true; // Credentials match
-            }
-        }
-        return false; // Authentication failed
-    }
+enum UserType {
+    SCRUM_MASTER, DEVELOPER, PRODUCT_OWNER
 }
