@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
 public class DBOperations {
     private com.mongodb.client.MongoClient mongoClient;
     private MongoDatabase database;
