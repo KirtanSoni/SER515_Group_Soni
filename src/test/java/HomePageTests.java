@@ -1,7 +1,6 @@
 package src.test.java;
 
 import src.main.java.org.classes.HomePage;
-
 import java.awt.EventQueue;
 public class HomePageTests implements ITest{
     public HomePageTests() {
