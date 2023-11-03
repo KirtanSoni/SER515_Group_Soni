@@ -4,8 +4,7 @@ public class Main {
         // to run tests, make sure Assertion is enabled in your IDE or run with -ea flag.
         UserStoryTests userStoryTests = new UserStoryTests();
         ProductBacklogTests productBacklogTests = new ProductBacklogTests();
+        DBTest.main(args);
         
-
-    }
-
+}
 }

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 import org.classes.ProductBacklog;
@@ -17,7 +18,7 @@ public class ProductBacklogTests {
 
         //adding user stories to product backlog
         productBacklog.addUserStory(userStory1);
-        List<UserStory> userStories = List.of(userStory2, userStory3);
+        List<UserStory> userStories = Arrays.asList(userStory2, userStory3);
         productBacklog.addUserStory(userStories);
 
         //testing getters
