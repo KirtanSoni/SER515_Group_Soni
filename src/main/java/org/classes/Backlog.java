@@ -2,10 +2,10 @@ package src.main.java.org.classes;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import java.awt.*;
 
 public class Backlog extends JFrame {
 
@@ -13,7 +13,7 @@ public class Backlog extends JFrame {
     private JTable userStoryTable;
     private JScrollPane tableScrollPane;
 
-    public Backlog() {
+    public Backlog(Object[][] userStories) {
         setTitle("Product Backlog");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
@@ -23,16 +23,13 @@ public class Backlog extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
 
-        // Create a panel for the title and "Groom" button
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        // Create a label for the title
         JLabel lblBacklog = new JLabel("Product Backlog");
         lblBacklog.setFont(new Font("Calibri", Font.BOLD, 36));
         titlePanel.add(lblBacklog);
 
-        // Create a button for "Groom"
         JButton groomButton = new JButton("Groom");
         groomButton.setFont(new Font("Calibri", Font.BOLD, 24));
         titlePanel.add(Box.createHorizontalGlue()); // Add space to the right
@@ -41,17 +38,11 @@ public class Backlog extends JFrame {
         contentPane.add(titlePanel, BorderLayout.NORTH);
 
         String[] columnNames = {"User Story", "Business Value", "Story Points", "Edit", "Delete"};
-        Object[][] userStories = {
-                {"User Story 1: As a user, I want...", 5, 5, "Edit", "Delete"},
-                {"User Story 2: As a user, I want...", 3, 3, "Edit", "Delete"},
-                {"User Story 3: As a user, I want...", 2, 2, "Edit", "Delete"},
-                // Add more user stories here
-        };
 
         TableModel model = new DefaultTableModel(userStories, columnNames) {
             public Class<?> getColumnClass(int column) {
                 if (column == 1 || column == 2) {
-                    return Integer.class; // Make Business Value and Story Points columns display numbers
+                    return Integer.class;
                 }
                 return String.class;
             }
@@ -75,9 +66,9 @@ public class Backlog extends JFrame {
             @Override
             public DefaultCellEditor getCellEditor(int row, int column) {
                 if (column == 3) {
-                    return new ButtonEditor(new JCheckBox(), "Edit", this);
+                    return new ButtonEditor(new JCheckBox(), "Edit");
                 } else if (column == 4) {
-                    return new ButtonEditor(new JCheckBox(), "Delete", this);
+                    return new ButtonEditor(new JCheckBox(), "Delete");
                 }
                 return (DefaultCellEditor) super.getCellEditor(row, column);
             }
@@ -90,58 +81,53 @@ public class Backlog extends JFrame {
         contentPane.add(tableScrollPane, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Backlog backlogFrame = new Backlog();
-                backlogFrame.setVisible(true);
+    // Inner class for ButtonRenderer
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+        public ButtonRenderer(String label) {
+            setOpaque(true);
+            setText(label);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            return this;
+        }
+    }
+
+    // Inner class for ButtonEditor
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+        private boolean isPushed;
+
+        public ButtonEditor(JCheckBox checkBox, String label) {
+            super(checkBox);
+            button = new JButton(label);
+            button.setOpaque(true);
+            button.addActionListener(e -> fireEditingStopped());
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(table.getSelectionForeground());
+                button.setBackground(table.getSelectionBackground());
+            } else {
+                button.setForeground(table.getForeground());
+                button.setBackground(table.getBackground());
             }
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            isPushed = false;
+            return button.getText();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Backlog backlogFrame = new Backlog(new Object[][]{}); // Initialize with an empty array or provide dynamic data
+            backlogFrame.setVisible(true);
         });
-    }
-}
-
-class ButtonRenderer extends JButton implements TableCellRenderer {
-    public ButtonRenderer(String label) {
-        setOpaque(true);
-        setText(label);
-    }
-
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        return this;
-    }
-}
-
-class ButtonEditor extends DefaultCellEditor {
-    protected JButton button;
-    private boolean isPushed;
-    private JTable table;
-
-    public ButtonEditor(JCheckBox checkBox, String label, JTable table) {
-        super(checkBox);
-        this.table = table;
-        button = new JButton(label);
-        button.setOpaque(true);
-        button.addActionListener(e -> fireEditingStopped());
-    }
-
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        if (isSelected) {
-            button.setForeground(table.getSelectionForeground());
-            button.setBackground(table.getSelectionBackground());
-        } else {
-            button.setForeground(table.getForeground());
-            button.setBackground(table.getBackground());
-        }
-        isPushed = true;
-        return button;
-    }
-
-    public Object getCellEditorValue() {
-        if (isPushed && "Delete".equals(button.getText())) {
-            JOptionPane.showMessageDialog(null, "Delete clicked for row " + table.getSelectedRow());
-        }
-        isPushed = false;
-        return button.getText();
     }
 }
