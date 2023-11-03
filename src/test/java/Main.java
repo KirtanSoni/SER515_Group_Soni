@@ -10,8 +10,9 @@ public class Main {
          ProductBacklogTests productBacklogTests = new ProductBacklogTests();
          //HomePageTests homePageTests = new HomePageTests();
         SprintBacklogTests sprintBacklogTests = new SprintBacklogTests();
+        BacklogTests backlogTests = new BacklogTests();
         HelperTest helpersTest = new HelperTest();
-        DBTest.main(args);
+//        DBTest.main(args);
 
 
     }
