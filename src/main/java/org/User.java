@@ -1,34 +1,16 @@
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Formatter;
+package org;
 
 class User {
-    private String email;
-    private String username;
-    private String password;
-    private UserType userType;
+    private final String email;
+    private final String username;
+    private final String password;
+    private final UserType userType;
 
     public User(String email, String username, String password, UserType userType) {
         this.email = email;
         this.username = username;
-        this.password = hashPassword(password);
+        this.password = password;
         this.userType = userType;
-    }
-
-    // Helper method to hash the password using SHA-256
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(password.getBytes());
-            Formatter formatter = new Formatter();
-            for (byte b : hash) {
-                formatter.format("%02x", b);
-            }
-            return formatter.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public String getEmail() {
@@ -37,10 +19,6 @@ class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public UserType getUserType() {

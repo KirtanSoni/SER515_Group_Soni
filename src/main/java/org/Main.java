@@ -1,3 +1,5 @@
+package org;
+
 public class Main {
     public static void main(String[] args) {
         // Create a UserManagement instance
@@ -16,6 +18,7 @@ public class Main {
         // Test cases using assertions
         assert userManagement.getAllUsers().size() == 3 : "Expected 3 users in UserManagement";
         assert userManagement.getUserByEmail("developer@example.com") == developer : "User not found by email";
+        assert userManagement.getUserByUsername("ProductOwner789") == productOwner : "User not found by username";
         assert userManagement.getUserByUserType(UserType.DEVELOPER).size() == 1 : "Expected 1 developer in UserManagement";
         assert userManagement.getUserByUserType(UserType.SCRUM_MASTER).size() == 1 : "Expected 1 Scrum Master in UserManagement";
 
@@ -27,3 +30,4 @@ public class Main {
         System.out.println("All test cases passed.");
     }
 }
+

@@ -1,8 +1,10 @@
+package org;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class UserManagement {
-    private List<User> users;
+    private final List<User> users;
 
     public UserManagement() {
         this.users = new ArrayList<>();
