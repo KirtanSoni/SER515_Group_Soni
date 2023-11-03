@@ -1,6 +1,5 @@
-// package src.test.java;
+package src.test.java;
 
-// import src.main.java.org.classes.Helpers;
 
 public class Main {
     public static void main(String[] args) {
