@@ -11,7 +11,6 @@ public class Main {
          HomePageTests homePageTests = new HomePageTests();
          SprintBacklogTests sprintBacklogTests = new SprintBacklogTests();
          HelperTest helpersTest = new HelperTest();
-//        DBTest.main(args);
          AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
 
 
