@@ -1,24 +1,26 @@
-import java.util.Arrays;
-import java.util.List;
+package src.test.java;
 
-import org.classes.ProductBacklog;
-import org.classes.UserStory;
-public class ProductBacklogTests {
+import java.util.List;
+import src.main.java.org.classes.ProductBacklog;
+import src.main.java.org.classes.UserStory;
+
+public class ProductBacklogTests implements ITest{
     public ProductBacklogTests(){
-       objTest();
+       test();
     }
-    void objTest(){
+    @Override
+    public void test(){
          ProductBacklog productBacklog = new ProductBacklog();
-        assert productBacklog.getUserStories().size() == 0;
+        assert productBacklog.getUserStories().isEmpty();
 
         //creating 3 user stories
-        UserStory userStory1 = new UserStory("title1", "Description1", "AcceptanceCriteria1", "BusinessValue1", "DeveloperValue1");
-        UserStory userStory2 = new UserStory("title2", "Description2", "AcceptanceCriteria2", "BusinessValue2", "DeveloperValue2");
-        UserStory userStory3 = new UserStory("title3", "Description3", "AcceptanceCriteria3", "BusinessValue3", "DeveloperValue3");
+        UserStory userStory1 = new UserStory("title1", "Description1", "AcceptanceCriteria1", 4, 5);
+        UserStory userStory2 = new UserStory("title2", "Description2", "AcceptanceCriteria2", 5, 6);
+        UserStory userStory3 = new UserStory("title3", "Description3", "AcceptanceCriteria3", 6, 7);
 
         //adding user stories to product backlog
         productBacklog.addUserStory(userStory1);
-        List<UserStory> userStories = Arrays.asList(userStory2, userStory3);
+        List<UserStory> userStories = List.of(userStory2, userStory3);
         productBacklog.addUserStory(userStories);
 
         //testing getters
