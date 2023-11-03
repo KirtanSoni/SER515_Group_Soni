@@ -57,8 +57,9 @@ public class HomePage extends JFrame {
     public HomePage() {
         setTitle("Home Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setBounds(100, 100, 733, 484);
+//      setExtendedState(JFrame.MAXIMIZED_BOTH);              // Full-screen
+// 		setBounds(100, 100, 733, 484);				         // default size
+        setBounds(110, 110, 806, 532);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
