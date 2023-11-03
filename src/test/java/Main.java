@@ -12,7 +12,7 @@ public class Main {
         SprintBacklogTests sprintBacklogTests = new SprintBacklogTests();
         BacklogTests backlogTests = new BacklogTests();
         HelperTest helpersTest = new HelperTest();
-//        DBTest.main(args);
+
 
 
     }
