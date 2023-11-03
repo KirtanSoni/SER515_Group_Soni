@@ -69,7 +69,7 @@ public class AddUserStory extends JFrame {
         setBackground(new Color(192, 192, 192));
         setTitle("Add User Story");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 733, 484);
+        setBounds(110, 110, 806, 532);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
