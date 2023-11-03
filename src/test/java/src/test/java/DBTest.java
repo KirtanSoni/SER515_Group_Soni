@@ -1,4 +1,6 @@
-import org.classes.DBOperations;
+package src.test.java;
+
+import src.main.java.org.classes.DBOperations;
 
 public class DBTest {
     public static void main(String[] args) {
