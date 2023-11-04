@@ -1,5 +1,6 @@
 package src.main.java.org.classes;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,6 +24,7 @@ import javax.swing.GroupLayout.Alignment;
 public class HomePage extends JFrame {
 
     private JPanel contentPane;
+    public ProductBacklog pdbl = new ProductBacklog();
 
     /**
      * Launch the application.
@@ -39,18 +41,6 @@ public class HomePage extends JFrame {
             }
         });
     }
-//	public static void HP() {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					HomePage frame = new HomePage();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
     /**
      * Create the frame.
      */
@@ -73,7 +63,9 @@ public class HomePage extends JFrame {
         JButton btnProductBacklogButton = new JButton("Product Backlog");
         btnProductBacklogButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnProductBacklogButton, "Under Development");
+//                JOptionPane.showMessageDialog(btnProductBacklogButton, "Under Development");
+                Backlog bl = new Backlog(pdbl);
+                bl.setVisible(true);
             }
         });
         btnProductBacklogButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -126,4 +118,5 @@ public class HomePage extends JFrame {
     }
 
 }
+
 
