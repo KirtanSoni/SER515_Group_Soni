@@ -48,10 +48,10 @@ public class Backlog extends JFrame {
         lblBacklog.setFont(new Font("Calibri", Font.BOLD, 36));
         titlePanel.add(lblBacklog);
 
-        JButton groomButton = new JButton("Groom");
-        groomButton.setFont(new Font("Calibri", Font.BOLD, 24));
+        JButton addUserStoryButton = new JButton("Add User Story");
+        addUserStoryButton.setFont(new Font("Calibri", Font.BOLD, 24));
         titlePanel.add(Box.createHorizontalGlue()); // Add space to the right
-        titlePanel.add(groomButton);
+        titlePanel.add(addUserStoryButton);
 
         contentPane.add(titlePanel, BorderLayout.NORTH);
 
