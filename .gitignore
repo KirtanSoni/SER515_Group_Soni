@@ -1,5 +1,4 @@
-
-
+*.class
 /target/classes/
 /target/test-classes/
 
