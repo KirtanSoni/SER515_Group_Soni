@@ -1,6 +1,7 @@
 package src.test.java;
 import src.main.java.org.classes.AddUserStory;
 import src.main.java.org.classes.HomePage;
+import src.main.java.org.classes.ProductBacklog;
 
 import java.awt.EventQueue;
 public class AddUserStoryTests implements ITest{
@@ -14,7 +15,7 @@ public class AddUserStoryTests implements ITest{
             public void run() {
                 try {
 
-                    AddUserStory nw = new AddUserStory();
+                    AddUserStory nw = new AddUserStory(new ProductBacklog());
                     nw.setVisible(true);
                     if (nw.isVisible() == true) {
                         System.out.println("AddUserStoryTests passed!");

@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,11 +31,11 @@ public class Backlog extends JFrame {
             concatedStories[i][4] = "Delete";
         }
 
-    System.out.print(Arrays.deepToString(concatedStories));
+        System.out.print(Arrays.deepToString(concatedStories));
 
 // Store the concatenated user stories in a new variable.
         setTitle("Product Backlog");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 800, 600);
 
         contentPane = new JPanel();
@@ -50,6 +52,12 @@ public class Backlog extends JFrame {
 
         JButton addUserStoryButton = new JButton("Add User Story");
         addUserStoryButton.setFont(new Font("Calibri", Font.BOLD, 24));
+        addUserStoryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AddUserStory aus = new AddUserStory(productbacklog);
+                aus.setVisible(true);
+            }
+        });
         titlePanel.add(Box.createHorizontalGlue()); // Add space to the right
         titlePanel.add(addUserStoryButton);
 
@@ -145,6 +153,7 @@ public class Backlog extends JFrame {
         SwingUtilities.invokeLater(() -> {
 //            Backlog backlogFrame = new Backlog(new Object[][]{}); // Initialize with an empty array or provide dynamic data
 //            backlogFrame.setVisible(true);
+
         });
     }
 }

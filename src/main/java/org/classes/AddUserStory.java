@@ -42,27 +42,27 @@ public class AddUserStory extends JFrame {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AddUserStory frame = new AddUserStory();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    AddUserStory frame = new AddUserStory();
+//                    frame.setVisible(true);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
 
     /**
      * Create the frame.
      */
-    public AddUserStory() {
+    public AddUserStory(ProductBacklog productBacklog) {
         setBackground(new Color(192, 192, 192));
         setTitle("Add User Story");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 733, 484);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
@@ -242,8 +242,10 @@ public class AddUserStory extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserStory us = new UserStory(tit, desc, accept, bv, dv);
-                System.out.println(us);
+//                System.out.println(us);
+                productBacklog.addUserStory(us);
                 dispose();
+
             }
         });
         submit.setForeground(new Color(0, 0, 0));
