@@ -6,6 +6,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Backlog extends JFrame {
 
@@ -13,7 +16,22 @@ public class Backlog extends JFrame {
     private JTable userStoryTable;
     private JScrollPane tableScrollPane;
 
-    public Backlog(Object[][] userStories) {
+    public Backlog(ProductBacklog productbacklog) {
+        List<UserStory> Userstories = productbacklog.getUserStories();
+        Object[][] concatedStories = new Object[Userstories.size()][5];
+
+        for (int i = 0; i < Userstories.size(); i++) {
+            UserStory userStory = Userstories.get(i);
+            concatedStories[i][0] = userStory.getTitle() +":"+ userStory.getId();
+            concatedStories[i][1] = userStory.getBusinessValue();
+            concatedStories[i][2] = userStory.getDeveloperValue();
+            concatedStories[i][3] = "Edit";
+            concatedStories[i][4] = "Delete";
+        }
+
+    System.out.print(Arrays.deepToString(concatedStories));
+
+// Store the concatenated user stories in a new variable.
         setTitle("Product Backlog");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
@@ -38,8 +56,7 @@ public class Backlog extends JFrame {
         contentPane.add(titlePanel, BorderLayout.NORTH);
 
         String[] columnNames = {"User Story", "Business Value", "Story Points", "Edit", "Delete"};
-
-        TableModel model = new DefaultTableModel(userStories, columnNames) {
+        TableModel model = new DefaultTableModel(concatedStories, columnNames) {
             public Class<?> getColumnClass(int column) {
                 if (column == 1 || column == 2) {
                     return Integer.class;
@@ -126,8 +143,8 @@ public class Backlog extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Backlog backlogFrame = new Backlog(new Object[][]{}); // Initialize with an empty array or provide dynamic data
-            backlogFrame.setVisible(true);
+//            Backlog backlogFrame = new Backlog(new Object[][]{}); // Initialize with an empty array or provide dynamic data
+//            backlogFrame.setVisible(true);
         });
     }
 }

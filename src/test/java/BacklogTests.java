@@ -1,8 +1,11 @@
 package src.test.java;
 
 import java.awt.EventQueue;
-import src.main.java.org.classes.Backlog;
+import java.util.List;
 
+import src.main.java.org.classes.Backlog;
+import src.main.java.org.classes.UserStory;
+import src.main.java.org.classes.*;
 public class BacklogTests implements ITest {
     public BacklogTests() {
         test();
@@ -19,15 +22,18 @@ public class BacklogTests implements ITest {
     private void testCase1() {
         EventQueue.invokeLater(() -> {
             try {
-                Object[][] userStories = {
-                        {"User Story 1: As a user, I want...", 5, 5, "Edit", "Delete"},
-                        {"User Story 2: As a user, I want...", 11, 3, "Edit", "Delete"},
-                        // Define user stories for test case 1
-                };
+                UserStory userStory1 = new UserStory("title1", "Description1", "AcceptanceCriteria1", 4, 5);
+                UserStory userStory2 = new UserStory("title2", "Description2", "AcceptanceCriteria2", 5, 6);
+                UserStory userStory3 = new UserStory("title3", "Description3", "AcceptanceCriteria3", 6, 7);
 
-                Backlog backlog = new Backlog(userStories);
+                //adding user stories to product backlog
+                ProductBacklog productBacklog = new ProductBacklog();
+                productBacklog.addUserStory(userStory1);
+                List<UserStory> userStories = List.of(userStory2, userStory3);
+                productBacklog.addUserStory(userStories);
+                Backlog B = new Backlog(productBacklog);
 
-                backlog.setVisible(true);
+                B.setVisible(true);
                 System.out.println("Test case 1 passed!");
             } catch (Exception e) {
                 System.out.println("Error in test case 1: " + e);
@@ -35,22 +41,6 @@ public class BacklogTests implements ITest {
         });
     }
 
-    private void testCase2() {
-        EventQueue.invokeLater(() -> {
-            try {
-                Object[][] userStories = {
-                        // Define different user stories for test case 2
-                };
-
-                Backlog backlog = new Backlog(userStories);
-
-                backlog.setVisible(true);
-                System.out.println("Test case 2 passed!");
-            } catch (Exception e) {
-                System.out.println("Error in test case 2: " + e);
-            }
-        });
-    }
 
     // Add more test cases as needed
 }
