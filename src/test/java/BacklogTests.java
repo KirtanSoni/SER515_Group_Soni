@@ -1,6 +1,7 @@
 package src.test.java;
 
 import java.awt.EventQueue;
+import java.util.Arrays;
 import java.util.List;
 
 import src.main.java.org.classes.Backlog;
@@ -29,7 +30,7 @@ public class BacklogTests implements ITest {
                 //adding user stories to product backlog
                 ProductBacklog productBacklog = new ProductBacklog();
                 productBacklog.addUserStory(userStory1);
-                List<UserStory> userStories = List.of(userStory2, userStory3);
+                List<UserStory> userStories = Arrays.asList(userStory2, userStory3);
                 productBacklog.addUserStory(userStories);
                 Backlog B = new Backlog(productBacklog);
 

@@ -12,7 +12,7 @@ public class Main {
         SprintBacklogTests sprintBacklogTests = new SprintBacklogTests();
         HelperTest helpersTest = new HelperTest();
         AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
-
+        DBTest dbTest = new DBTest();
     }
 
 }

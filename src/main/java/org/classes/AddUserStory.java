@@ -244,6 +244,8 @@ public class AddUserStory extends JFrame {
                 UserStory us = new UserStory(tit, desc, accept, bv, dv);
 //                System.out.println(us);
                 productBacklog.addUserStory(us);
+                DBOperations dbOperations = new DBOperations("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/", "test", "UserStory");
+                dbOperations.addUserStory(us);
                 dispose();
 
             }

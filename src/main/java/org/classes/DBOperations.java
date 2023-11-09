@@ -20,6 +20,7 @@ public class DBOperations {
         userStoryCollection = database.getCollection(collectionName);
     }
 
+    // Adding/Creating a US in the Database
     public void addUserStory(UserStory US) {
         Document userStoryDocument = new Document();
         userStoryDocument.put("uid", US.getId());
@@ -32,26 +33,31 @@ public class DBOperations {
         userStoryCollection.insertOne(userStoryDocument);
     }
 
+    // To Fetch a US from DB by ID
     public Document getUserStoryById(int id) {
         Bson filter = new Document("_id", id);
         return userStoryCollection.find(filter).first();
     }
 
+    // To fetch all US's from DB
     public List<Document> getAllUserStories() {
         return userStoryCollection.find().into(new ArrayList<>());
     }
 
+    //Updating Document based on a particular field in the DB
     public void updateDocument(String filterField, Object filterValue, String updateField, Object updateValue) {
         Document filter = new Document(filterField, filterValue);
         Document update = new Document("$set", new Document(updateField, updateValue));
         userStoryCollection.updateOne(filter, update);
     }
 
+    //Deleting US by ID from DB
     public void deleteUserStoryById(int uid) {
         Bson filter = new Document("uid", uid);
         userStoryCollection.deleteOne(filter);
     }
 
+    //Deleting all US's
     public void deleteAll() {
         userStoryCollection.drop();
     }
