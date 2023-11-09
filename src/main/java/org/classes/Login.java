@@ -11,15 +11,33 @@ public class Login extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JButton signupButton;
+    private JPanel cardPanel;
 
     public Login() {
         setTitle("Login Form");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(110, 110, 806, 532);
+
+        cardPanel = new JPanel(new CardLayout());
+        JPanel loginPanel = createLoginPanel();
+        JPanel signupPanel = new Signup();
+
+        cardPanel.add(loginPanel, "login");
+        cardPanel.add(signupPanel, "signup");
+
+        CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+        cardLayout.show(cardPanel, "login");
+
+        add(cardPanel);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private JPanel createLoginPanel() {
         JPanel contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
 
         JLabel emailLabel = new JLabel("Email:");
         emailField = new JTextField(20);
@@ -29,6 +47,9 @@ public class Login extends JFrame {
 
         loginButton = new JButton("Login");
         loginButton.setFont(new Font("Calibri", Font.BOLD, 18));
+
+        signupButton = new JButton("Don't have an account? SignUp");
+        signupButton.setFont(new Font("Calibri", Font.PLAIN, 14));
 
         contentPane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -54,6 +75,9 @@ public class Login extends JFrame {
         c.gridwidth = 2;
         contentPane.add(loginButton, c);
 
+        c.gridy = 3;
+        contentPane.add(signupButton, c);
+
         // Add action listener for the login button
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -65,6 +89,7 @@ public class Login extends JFrame {
                 if (isValidEmail(email)) {
                     if (isValidPassword(password)) {
                         System.out.println("Email and password are valid");
+                        // You can perform other actions or validations here
                     } else {
                         JOptionPane.showMessageDialog(contentPane, "Invalid password");
                     }
@@ -73,6 +98,17 @@ public class Login extends JFrame {
                 }
             }
         });
+
+        // Add action listener for the signup button
+        signupButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+                cardLayout.show(cardPanel, "signup");
+            }
+        });
+
+        return contentPane;
     }
 
     private boolean isValidEmail(String email) {
@@ -84,6 +120,7 @@ public class Login extends JFrame {
         return password.length() >= 8;
     }
 
+    // Methods for testing purposes
     public void setEmail(String email) {
         emailField.setText(email);
     }
@@ -94,9 +131,11 @@ public class Login extends JFrame {
 
     public void clickLoginButton() {
         // Simulate a button click
-        System.out.println(passwordField);
-        System.out.println(emailField);
-
         loginButton.doClick();
+    }
+
+    public void switchToSignup() {
+        CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+        cardLayout.show(cardPanel, "signup");
     }
 }

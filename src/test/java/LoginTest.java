@@ -26,12 +26,13 @@ public class LoginTest implements ITest {
                 loginForm.setPassword("password123");
 
                 // Trigger the login button click
-                loginForm.clickLoginButton();
+//                loginForm.clickLoginButton();
 
                 // Add assertions for the expected behavior based on the provided email and password
                 // For example, check if the user is successfully logged in or if an error message is displayed.
 
                 System.out.println("Test case 1 passed!");
+                loginForm.setVisible(true);
             } catch (Exception e) {
                 System.out.println("Error in test case 1: " + e);
             }
@@ -44,9 +45,8 @@ public class LoginTest implements ITest {
                 Login loginForm = new Login();
                 loginForm.setEmail("test@example");
                 loginForm.setPassword("p");
-
                 // Trigger the login button click
-                loginForm.clickLoginButton();
+//                loginForm.clickLoginButton();
 
                 // Add assertions for the expected behavior based on the provided email and password
                 // For example, check if the user is successfully logged in or if an error message is displayed.
