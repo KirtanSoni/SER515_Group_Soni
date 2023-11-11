@@ -55,6 +55,10 @@ public class SprintBacklog {
         UserStory userStory = UserStory.getUserStory(this.sprintBacklog, id);
         userStory.setStatus(status);
     }
+
+    public void PushChangetoDatabase(int id,Status prev,Status curr){
+
+    }
 // progress
     public int getProgress(){
         int progress = 0;
