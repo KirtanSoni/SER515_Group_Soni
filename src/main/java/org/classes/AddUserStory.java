@@ -242,10 +242,10 @@ public class AddUserStory extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserStory us = new UserStory(tit, desc, accept, bv, dv);
-//                System.out.println(us);
-                productBacklog.addUserStory(us);
+////                System.out.println(us);
                 DBOperations dbOperations = new DBOperations("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/", "test", "UserStory");
                 dbOperations.addUserStory(us);
+                productBacklog.addUserStory(us);
                 dispose();
 
             }

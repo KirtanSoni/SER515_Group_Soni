@@ -25,6 +25,9 @@ public class UserStory {
         this.DeveloperValue = developerValue;
     }
 
+    public UserStory(int uid) {
+        this.id = uid;
+    }
 // Getters ---------------------------------------------------------
     public int getId(){
         return this.id;
