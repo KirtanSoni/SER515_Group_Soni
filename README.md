@@ -8,3 +8,7 @@ Java GUI tool Kit: Swing
 - Monil Prajapati
 - Janmay Bhatt
 - Neel Shah (PULL AND PUSH DONE)
+
+
+
+mvn clean dependency:copy-dependencies package
