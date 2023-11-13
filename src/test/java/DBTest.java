@@ -15,7 +15,7 @@ public class DBTest implements ITest{
     @Override
     public void test() {
         UserStory userStory1 = new UserStory("title1", "Description1", "AcceptanceCriteria1", 3, 4);
-        DBOperations dbOperations = new DBOperations("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/", "test", "UserStory");
+        DBOperations dbOperations = new DBOperations("test", "UserStory");
         dbOperations.addUserStory(userStory1);
         Document userStory = dbOperations.getUserStoryById(userStory1.getId());
         List<Document> allUserStories = dbOperations.getAllUserStories();

@@ -8,10 +8,10 @@ public class Main {
         // to run tests, make sure Assertion is enabled in your IDE or run with -ea flag.
 //         UserStoryTests userStoryTests = new UserStoryTests();
 //         ProductBacklogTests productBacklogTests = new ProductBacklogTests();
-         HomePageTests homePageTests = new HomePageTests();
+//         HomePageTests homePageTests = new HomePageTests();
 //        SprintBacklogTests sprintBacklogTests = new SprintBacklogTests();
 //        HelperTest helpersTest = new HelperTest();
-//        AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
+        AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
 //        DBTest dbTest = new DBTest();
     }
 

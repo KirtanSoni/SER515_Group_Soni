@@ -13,8 +13,9 @@ public class DBOperations {
     private com.mongodb.client.MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> userStoryCollection;
+    String connectionString = System.getenv("DB_CONNECTION_STRING");
 
-    public DBOperations(String connectionString, String dbName, String collectionName) {
+    public DBOperations(String dbName, String collectionName) {
         mongoClient = MongoClients.create(connectionString);
         database = mongoClient.getDatabase(dbName);
         userStoryCollection = database.getCollection(collectionName);
