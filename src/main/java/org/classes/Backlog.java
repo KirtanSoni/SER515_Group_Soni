@@ -121,6 +121,7 @@ public class Backlog extends JFrame {
 
             for (Document document : userStoryCollection.find()) {
                 UserStory userStory = new UserStory(
+                        document.getInteger("uid"),
                         document.getString("title"),
                         document.getString("description"),
                         document.getString("acceptanceCriteria"),
