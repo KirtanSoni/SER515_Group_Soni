@@ -242,7 +242,9 @@ public class AddUserStory extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserStory us = new UserStory(tit, desc, accept, bv, dv);
-//                System.out.println(us);
+////                System.out.println(us);
+                DBOperations dbOperations = new DBOperations("test", "UserStory");
+                dbOperations.addUserStory(us);
                 productBacklog.addUserStory(us);
                 dispose();
 
