@@ -3,16 +3,13 @@ package src.main.java.org.classes;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
 public class Login extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
     private JButton loginButton;
-    private JButton signupButton;
-    private JPanel cardPanel;
+    private final JPanel cardPanel;
 
     public Login() {
         setTitle("Login Form");
@@ -48,7 +45,7 @@ public class Login extends JFrame {
         loginButton = new JButton("Login");
         loginButton.setFont(new Font("Calibri", Font.BOLD, 18));
 
-        signupButton = new JButton("Don't have an account? SignUp");
+        JButton signupButton = new JButton("Don't have an account? SignUp");
         signupButton.setFont(new Font("Calibri", Font.PLAIN, 14));
 
         contentPane.setLayout(new GridBagLayout());
@@ -78,34 +75,25 @@ public class Login extends JFrame {
         c.gridy = 3;
         contentPane.add(signupButton, c);
 
-        // Add action listener for the login button
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String email = emailField.getText();
-                char[] passwordChars = passwordField.getPassword();
-                String password = new String(passwordChars);
+        loginButton.addActionListener(e -> {
+            String email = emailField.getText();
+            char[] passwordChars = passwordField.getPassword();
 
-                if (isValidEmail(email)) {
-                    if (isValidPassword(password)) {
-                        System.out.println("Email and password are valid");
-                        // You can perform other actions or validations here
-                    } else {
-                        JOptionPane.showMessageDialog(contentPane, "Invalid password");
-                    }
+            if (isValidEmail(email)) {
+                if (isValidPassword(passwordChars)) {
+                    System.out.println("Email and password are valid");
+                    // You can perform other actions or validations here
                 } else {
-                    JOptionPane.showMessageDialog(contentPane, "Invalid email address");
+                    showMessageDialog("Invalid password");
                 }
+            } else {
+                showMessageDialog("Invalid email address");
             }
         });
 
-        // Add action listener for the signup button
-        signupButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
-                cardLayout.show(cardPanel, "signup");
-            }
+        signupButton.addActionListener(e -> {
+            CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+            cardLayout.show(cardPanel, "signup");
         });
 
         return contentPane;
@@ -116,8 +104,12 @@ public class Login extends JFrame {
         return Pattern.compile(emailPattern).matcher(email).matches();
     }
 
-    private boolean isValidPassword(String password) {
-        return password.length() >= 8;
+    private boolean isValidPassword(char[] passwordChars) {
+        return passwordChars.length >= 8;
+    }
+
+    private void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     // Methods for testing purposes
@@ -129,13 +121,4 @@ public class Login extends JFrame {
         passwordField.setText(password);
     }
 
-    public void clickLoginButton() {
-        // Simulate a button click
-        loginButton.doClick();
-    }
-
-    public void switchToSignup() {
-        CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
-        cardLayout.show(cardPanel, "signup");
-    }
 }

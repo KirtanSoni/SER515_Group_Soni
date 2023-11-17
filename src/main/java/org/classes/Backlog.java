@@ -6,16 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class Backlog extends JFrame {
 
-    private JPanel contentPane;
-    private JTable userStoryTable;
-    private JScrollPane tableScrollPane;
-    private ProductBacklog productbacklog;
+    private final ProductBacklog productbacklog;
 
     public Backlog(ProductBacklog productbacklog) {
         this.productbacklog = productbacklog;
@@ -36,7 +31,7 @@ public class Backlog extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 800, 600);
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
@@ -50,11 +45,9 @@ public class Backlog extends JFrame {
 
         JButton addUserStoryButton = new JButton("Add User Story");
         addUserStoryButton.setFont(new Font("Calibri", Font.BOLD, 24));
-        addUserStoryButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddUserStory aus = new AddUserStory(productbacklog);
-                aus.setVisible(true);
-            }
+        addUserStoryButton.addActionListener(e -> {
+            AddUserStory aus = new AddUserStory(productbacklog);
+            aus.setVisible(true);
         });
         titlePanel.add(Box.createHorizontalGlue());
         titlePanel.add(addUserStoryButton);
@@ -70,12 +63,9 @@ public class Backlog extends JFrame {
                 return String.class;
             }
 
-            public boolean isCellEditable(int row, int column) {
-                return true;
-            }
         };
 
-        userStoryTable = new JTable(model) {
+        JTable userStoryTable = new JTable(model) {
             @Override
             public TableCellRenderer getCellRenderer(int row, int column) {
                 if (column == 3) {
@@ -90,9 +80,6 @@ public class Backlog extends JFrame {
             public DefaultCellEditor getCellEditor(int row, int column) {
                 if (column == 3) {
                     return new ButtonEditor(new JCheckBox(), "Edit", row) {
-                        public void actionPerformed(ActionEvent e) {
-                            editUserStory(row);
-                        }
                     };
                 } else if (column == 4) {
                     return new ButtonEditor(new JCheckBox(), "Delete", row);
@@ -103,7 +90,7 @@ public class Backlog extends JFrame {
 
         userStoryTable.setFont(new Font("Calibri", Font.PLAIN, 18));
 
-        tableScrollPane = new JScrollPane(userStoryTable);
+        JScrollPane tableScrollPane = new JScrollPane(userStoryTable);
         contentPane.add(tableScrollPane, BorderLayout.CENTER);
     }
 
@@ -118,7 +105,7 @@ public class Backlog extends JFrame {
         return userStories.get(row);
     }
 
-    class ButtonRenderer extends JButton implements TableCellRenderer {
+    static class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer(String label) {
             setOpaque(true);
             setText(label);
@@ -132,7 +119,7 @@ public class Backlog extends JFrame {
 
     class ButtonEditor extends DefaultCellEditor {
         protected JButton button;
-        private int row;
+        private final int row;
 
         public ButtonEditor(JCheckBox checkBox, String label, int row) {
             super(checkBox);
@@ -168,14 +155,14 @@ public class Backlog extends JFrame {
 }
 
 class EditUserStoryModal extends JDialog {
-    private JTextField titleField;
-    private JTextField businessValueField;
-    private JTextField developerValueField;
+    private final JTextField titleField;
+    private final JTextField businessValueField;
+    private final JTextField developerValueField;
 
     // Store the original values
-    private String oldTitle;
-    private int oldBusinessValue;
-    private int oldDeveloperValue;
+    private final String oldTitle;
+    private final int oldBusinessValue;
+    private final int oldDeveloperValue;
 
     public EditUserStoryModal(UserStory userStory) {
         // Capture the original values
@@ -195,29 +182,26 @@ class EditUserStoryModal extends JDialog {
         developerValueField = new JTextField(String.valueOf(userStory.getDeveloperValue()));
 
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Update the UserStory object with edited values
-                userStory.setTitle(titleField.getText());
-                userStory.setBusinessValue(Integer.parseInt(businessValueField.getText()));
-                userStory.setDeveloperValue(Integer.parseInt(developerValueField.getText()));
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        saveButton.addActionListener(e -> {
+            // Update the UserStory object with edited values
+            userStory.setTitle(titleField.getText());
+            userStory.setBusinessValue(Integer.parseInt(businessValueField.getText()));
+            userStory.setDeveloperValue(Integer.parseInt(developerValueField.getText()));
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-                // Calculate the center position
-                int x = (screenSize.width - getWidth()) / 2;
-                int y = (screenSize.height - getHeight()) / 2;
+            // Calculate the center position
+            int x = (screenSize.width - getWidth()) / 2;
+            int y = (screenSize.height - getHeight()) / 2;
 
-                // Set the location
-                // Print both old and new values
-                System.out.println("Old Values: Title = " + oldTitle + ", Business Value = " + oldBusinessValue + ", Developer Value = " + oldDeveloperValue);
-                System.out.println("New Values: Title = " + userStory.getTitle() + ", Business Value = " + userStory.getBusinessValue() + ", Developer Value = " + userStory.getDeveloperValue());
+            // Set the location
+            // Print both old and new values
+            System.out.println("Old Values: Title = " + oldTitle + ", Business Value = " + oldBusinessValue + ", Developer Value = " + oldDeveloperValue);
+            System.out.println("New Values: Title = " + userStory.getTitle() + ", Business Value = " + userStory.getBusinessValue() + ", Developer Value = " + userStory.getDeveloperValue());
 
-                // Close the modal
-                setLocation(x, y);
+            // Close the modal
+            setLocation(x, y);
 
-                dispose();
-            }
+            dispose();
         });
 
         add(titleLabel);
