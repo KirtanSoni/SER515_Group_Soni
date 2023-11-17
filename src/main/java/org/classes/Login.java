@@ -3,6 +3,7 @@ package src.main.java.org.classes;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Login extends JFrame {
@@ -10,10 +11,13 @@ public class Login extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private final JPanel cardPanel;
+//    private final UserAuthentication userAuthentication;
 
     public Login() {
         setTitle("Login Form");
         setBounds(110, 110, 806, 532);
+
+//        userAuthentication = new UserAuthentication(); // Initialize UserAuthentication
 
         cardPanel = new JPanel(new CardLayout());
         JPanel loginPanel = createLoginPanel();
@@ -81,8 +85,7 @@ public class Login extends JFrame {
 
             if (isValidEmail(email)) {
                 if (isValidPassword(passwordChars)) {
-                    System.out.println("Email and password are valid");
-                    // You can perform other actions or validations here
+                    login(email, passwordChars);
                 } else {
                     showMessageDialog("Invalid password");
                 }
@@ -108,6 +111,22 @@ public class Login extends JFrame {
         return passwordChars.length >= 8;
     }
 
+    private void login(String email, char[] passwordChars) {
+
+        String password = new String(passwordChars);
+        System.out.print("password");
+        System.out.println(password);
+//        userAuthentication.login(email, password);
+//        User currentUser = userAuthentication.getCurrentUser();
+
+//        if (currentUser != null) {
+//            System.out.println("Login successful. Welcome, " + currentUser.getUsername() + "!");
+//            // You can perform additional actions after successful login
+//        } else {
+//            showMessageDialog("Invalid login credentials.");
+//        }
+    }
+
     private void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -120,5 +139,4 @@ public class Login extends JFrame {
     public void setPassword(String password) {
         passwordField.setText(password);
     }
-
 }
