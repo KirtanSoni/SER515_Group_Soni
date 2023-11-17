@@ -85,6 +85,7 @@ public class Signup extends JPanel {
             showErrorDialog();
         } else {
             // Implement your sign-up process
+            System.out.println("Sign Up successful!");
         }
     }
 
@@ -104,5 +105,22 @@ public class Signup extends JPanel {
 
     private void showErrorDialog() {
         JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Methods for setting values (added for testing purposes)
+    public void setFirstName(String firstName) {
+        firstNameField.setText(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        lastNameField.setText(lastName);
+    }
+
+    public void setEmail(String email) {
+        emailField.setText(email);
+    }
+
+    public void setPassword(String password) {
+        passwordField.setText(password);
     }
 }

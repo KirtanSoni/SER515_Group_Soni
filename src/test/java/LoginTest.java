@@ -29,16 +29,4 @@ public class LoginTest implements ITest {
             }
         });
     }
-    private void testCase2() {
-        EventQueue.invokeLater(() -> {
-            try {
-                Login loginForm = new Login();
-                loginForm.setEmail("test@example");
-                loginForm.setPassword("p");
-
-            } catch (Exception e) {
-                System.out.println("Error in test case 2: " + e);
-            }
-        });
-    }
 }

@@ -9,9 +9,10 @@ public class Main {
 //         UserStoryTests userStoryTests = new UserStoryTests();
 //         ProductBacklogTests productBacklogTests = new ProductBacklogTests();
 //         HomePageTests homePageTests = new HomePageTests();
-//         LoginTest loginTest = new LoginTest();
+         LoginTest loginTest = new LoginTest();
+         SignupTest signupTest = new SignupTest();
 //        SprintBacklogTests sprintBacklogTests = new SprintBacklogTests();
-        BacklogTests backlogTests = new BacklogTests();
+//        BacklogTests backlogTests = new BacklogTests();
 //        HelperTest helpersTest = new HelperTest();
 //        AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
 
