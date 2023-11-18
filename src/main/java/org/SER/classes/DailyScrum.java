@@ -151,7 +151,7 @@ public class DailyScrum extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daily Scrum");
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setText("Daily Scrum");
 
 
