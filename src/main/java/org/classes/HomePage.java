@@ -24,7 +24,10 @@ import javax.swing.GroupLayout.Alignment;
 public class HomePage extends JFrame {
 
     private JPanel contentPane;
+
+    public SprintBacklog sp = new SprintBacklog();
     public ProductBacklog pdbl = new ProductBacklog();
+
 
     /**
      * Launch the application.
@@ -81,7 +84,9 @@ public class HomePage extends JFrame {
         JButton btnSprintBacklog = new JButton("Sprint Backlog");
         btnSprintBacklog.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnSprintBacklog, "Under Development");
+//                JOptionPane.showMessageDialog(btnProductBacklogButton, "Under Development");
+                ViewSprintBacklog bl = new ViewSprintBacklog();
+                bl.setVisible(true);
             }
         });
         btnSprintBacklog.setFont(new Font("Calibri", Font.BOLD, 18));
