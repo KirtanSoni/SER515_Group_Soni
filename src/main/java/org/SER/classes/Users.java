@@ -1,4 +1,4 @@
-package src.main.java.org.classes;
+package org.SER.classes;
 
 class User {
     private final String email;

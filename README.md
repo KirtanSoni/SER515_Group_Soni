@@ -11,4 +11,5 @@ Java GUI tool Kit: Swing
 
 
 
-mvn clean dependency:copy-dependencies package
+Mac Run command: 
+```sh run.sh``` from root.

@@ -1,4 +1,4 @@
-package src.main.java.org.classes;
+package org.SER.classes;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

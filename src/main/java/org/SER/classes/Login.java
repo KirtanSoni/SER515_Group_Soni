@@ -1,4 +1,6 @@
-package src.main.java.org.classes;
+package org.SER.classes;
+
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -85,11 +87,11 @@ public class Login extends JFrame {
 
             if (isValidEmail(email)) {
                 if (isValidPassword(passwordChars)) {
-                    login(email, passwordChars);
-                } else {
-                    showMessageDialog("Invalid password");
+                    HomePage homepage = new HomePage();
+                    homepage.setVisible(true);
+                    this.dispose();                } else {
+
                 }
-            } else {
                 showMessageDialog("Invalid email address");
             }
         });
