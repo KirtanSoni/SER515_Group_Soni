@@ -161,13 +161,25 @@ public class DailyScrum extends javax.swing.JFrame {
         List<UserStory> inprogress= sprint.getUserStoriesbyStatus(Status.IN_PROGRESS);
         List<UserStory> done= sprint.getUserStoriesbyStatus(Status.DONE);
 
+        Object[][]  todoRow = new Object[todo.size()][2];
+        for (int i = 0; i < todo.size(); i++) {
+            todoRow[i][0] = todo.get(i).getTitle();
+            todoRow[i][1] = "TODO";
 
+        }
         Object[][]  progressRow = new Object[inprogress.size()][2];
         for (int i = 0; i < inprogress.size(); i++) {
             progressRow[i][0] = inprogress.get(i).getTitle();
             progressRow[i][1] = "IN_PROGRESS";
 
         }
+        Object[][]  doneRow = new Object[done.size()][2];
+        for (int i = 0; i < done.size(); i++) {
+            doneRow[i][0] = done.get(i).getTitle();
+            doneRow[i][1] = "DONE";
+
+        }
+
         ProgressTable.setModel(new javax.swing.table.DefaultTableModel(
                 progressRow,
                 new String [] {
@@ -183,7 +195,7 @@ public class DailyScrum extends javax.swing.JFrame {
             }
         });
         ProgressTable.setSelectionBackground(new java.awt.Color(102, 153, 0));
-        ProgressTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        ProgressTable.setSelectionForeground(new java.awt.Color(255, 255, 255, 0));
         ProgressTable.setShowHorizontalLines(true);
         ProgressPanel.setViewportView(ProgressTable);
         if (ProgressTable.getColumnModel().getColumnCount() > 0) {
@@ -194,17 +206,7 @@ public class DailyScrum extends javax.swing.JFrame {
 
         TodoTable.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         TodoTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null}
-                },
+                todoRow,
                 new String [] {
                         "User Story", "Status"
                 }
@@ -229,12 +231,7 @@ public class DailyScrum extends javax.swing.JFrame {
         }
 
         DoneTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null}
-                },
+                doneRow,
                 new String [] {
                         "User Story", "Status"
                 }

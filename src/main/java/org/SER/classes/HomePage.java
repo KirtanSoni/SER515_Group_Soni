@@ -82,7 +82,9 @@ public class HomePage extends JFrame {
         JButton btnSprintBacklog = new JButton("Sprint Backlog");
         btnSprintBacklog.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnSprintBacklog, "Under Development");
+//                JOptionPane.showMessageDialog(btnSprintBacklog, "Under Development");
+                ViewSprintBacklog sb = new ViewSprintBacklog();
+                sb.setVisible(true);
             }
         });
         btnSprintBacklog.setFont(new Font("Calibri", Font.BOLD, 18));
