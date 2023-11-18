@@ -26,7 +26,7 @@ public class Backlog extends JFrame {
             concatedStories[i][0] = userStory.getTitle() +":"+ userStory.getId();
             concatedStories[i][1] = userStory.getBusinessValue();
             concatedStories[i][2] = userStory.getDeveloperValue();
-            concatedStories[i][3] = "Edit";
+            concatedStories[i][3] = "Move";
             concatedStories[i][4] = "Delete";
         }
 
@@ -64,7 +64,7 @@ public class Backlog extends JFrame {
 
         contentPane.add(titlePanel, BorderLayout.NORTH);
 
-        String[] columnNames = {"User Story", "Business Value", "Story Points", "Edit", "Delete"};
+        String[] columnNames = {"User Story", "Business Value", "Story Points", "Move", "Delete"};
         TableModel model = new DefaultTableModel(concatedStories, columnNames) {
             public Class<?> getColumnClass(int column) {
                 if (column == 1 || column == 2) {
@@ -82,7 +82,7 @@ public class Backlog extends JFrame {
             @Override
             public TableCellRenderer getCellRenderer(int row, int column) {
                 if (column == 3) {
-                    return new ButtonRenderer("Edit");
+                    return new ButtonRenderer("Move");
                 } else if (column == 4) {
                     return new ButtonRenderer("Delete");
                 }
@@ -92,7 +92,7 @@ public class Backlog extends JFrame {
             @Override
             public DefaultCellEditor getCellEditor(int row, int column) {
                 if (column == 3) {
-                    return new ButtonEditor(new JCheckBox(), "Edit");
+                    return new ButtonEditor(new JCheckBox(), "Move");
                 } else if (column == 4) {
                     return new ButtonEditor(new JCheckBox(), "Delete");
                 }
@@ -131,6 +131,7 @@ public class Backlog extends JFrame {
             button.setOpaque(true);
             button.addActionListener(e -> fireEditingStopped());
         }
+
 
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             if (isSelected) {

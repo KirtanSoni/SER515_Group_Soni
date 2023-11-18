@@ -154,9 +154,7 @@ public class DailyScrum extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setText("Daily Scrum");
 
-        UserStory test1= new UserStory( "title", "description", "acceptanceCriteria", 1, 1);
-        sprint.addUserStory(test1);
-        test1.setStatus(Status.IN_PROGRESS);
+
         List<UserStory> todo= sprint.getUserStoriesbyStatus(Status.TODO);
         List<UserStory> inprogress= sprint.getUserStoriesbyStatus(Status.IN_PROGRESS);
         List<UserStory> done= sprint.getUserStoriesbyStatus(Status.DONE);

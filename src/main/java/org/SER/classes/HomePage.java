@@ -84,6 +84,7 @@ public class HomePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
 //                JOptionPane.showMessageDialog(btnSprintBacklog, "Under Development");
                 ViewSprintBacklog sb = new ViewSprintBacklog();
+                sb.setSprintBacklog(spbl);
                 sb.setVisible(true);
             }
         });

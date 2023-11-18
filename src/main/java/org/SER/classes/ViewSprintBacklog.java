@@ -13,6 +13,7 @@ import java.awt.geom.Ellipse2D;
  * @author monil
  */
 public class ViewSprintBacklog extends javax.swing.JFrame {
+    SprintBacklog spbl;
 
 //    public class TableActionCellRenderEdit extends DefaultTableCellRenderer {
 //
@@ -29,7 +30,9 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
 //        }
 //        return action;
 //    }
-
+    public void setSprintBacklog(SprintBacklog s){
+        this.spbl = s;
+    }
     public class TableActionCellRenderDelete extends DefaultTableCellRenderer {
 
         @Override
