@@ -84,6 +84,15 @@ public class SprintBacklog {
         }
         this.sprintBacklog.addAll(userStories);
     }
+    public List<UserStory> getUserStoriesbyStatus(Status status){
+        List<UserStory> userStories = new ArrayList<UserStory>();
+        for(UserStory userStory : this.sprintBacklog){
+            if(userStory.getStatus() == status){
+                userStories.add(userStory);
+            }
+        }
+        return userStories;
+    }
 // remove User story
     //make sure to handle Status if user story is not in the list
     public void removeUserStory(UserStory userStory){
