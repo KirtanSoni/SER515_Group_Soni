@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="MyRuleset"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>Custom PMD ruleset for Java code</description>
+
+    <rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
+    <rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault" />
+    <rule ref="category/java/bestpractices.xml/UnusedPrivateField" />
+    <rule ref="category/java/design.xml/ExcessiveParameterList" />
+    <rule ref="category/java/design.xml/TooManyMethods" />
+    <rule ref="category/java/performance.xml/UseArraysAsList" />
+    <rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
+    <rule ref="category/java/codestyle.xml/EmptyControlStatement" />
+    <rule ref="category/java/bestpractices.xml/ForLoopVariableCount" />
+    <rule ref="category/java/bestpractices.xml/UseTryWithResources" />
+</ruleset>
