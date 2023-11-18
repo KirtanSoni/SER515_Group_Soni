@@ -1,2 +1,4 @@
-/target/classes/
-/target/test-classes/
+# Ignore target classes and test-classes directories
+/target/classes/*
+/target/test-classes/*
+

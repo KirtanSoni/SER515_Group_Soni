@@ -1,9 +1,11 @@
 package src.test.java;
-
+import src.main.java.org.classes.AddUserStory;
 import src.main.java.org.classes.HomePage;
+import src.main.java.org.classes.ProductBacklog;
+
 import java.awt.EventQueue;
-public class HomePageTests implements ITest{
-    public HomePageTests() {
+public class AddUserStoryTests implements ITest{
+    public AddUserStoryTests() {
         test();
     }
 
@@ -13,10 +15,10 @@ public class HomePageTests implements ITest{
             public void run() {
                 try {
 
-                    HomePage nw = new HomePage();
+                    AddUserStory nw = new AddUserStory(new ProductBacklog());
                     nw.setVisible(true);
                     if (nw.isVisible() == true) {
-                        System.out.println("HomePageTests passed!");
+                        System.out.println("AddUserStoryTests passed!");
 //                  Thread.sleep(1000);
                     }
 //              nw.setVisible(false);
@@ -30,7 +32,9 @@ public class HomePageTests implements ITest{
 
      public static void main(String[] args) {
 
-         HomePageTests homePageTests = new HomePageTests();
+         AddUserStoryTests addUserStoryTests = new AddUserStoryTests();
+
+
 
 
      }
