@@ -23,7 +23,7 @@ public class SprintBacklog {
 
 
 // Get SprintBacklog
-    public List<UserStory> sprintBacklog(){
+    public List<UserStory> getsprintBacklog(){
         return this.sprintBacklog;
     }
 

@@ -2,6 +2,7 @@ package org.SER.classes;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -105,6 +106,7 @@ public class DailyScrum extends javax.swing.JFrame {
         }// </editor-fold>
 
         private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
+//            System.out.println(jComboBox1.get);
 
         }
 
@@ -115,8 +117,8 @@ public class DailyScrum extends javax.swing.JFrame {
     }
 
 
-    public DailyScrum() {
-        initComponents();
+    public DailyScrum(SprintBacklog sprint) {
+        initComponents(sprint);
 
         TodoTable.getColumnModel().getColumn(1).setCellRenderer(new TableActionCellRenderDropDown());
         TodoTable.getColumnModel().getColumn(1).setCellEditor(new TableActionCellEditorDropDown());
@@ -133,7 +135,7 @@ public class DailyScrum extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+    private void initComponents(SprintBacklog sprint) {
 
         jLabel1 = new javax.swing.JLabel();
         ProgressPanel = new javax.swing.JScrollPane();
@@ -152,14 +154,22 @@ public class DailyScrum extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setText("Daily Scrum");
 
+        UserStory test1= new UserStory( "title", "description", "acceptanceCriteria", 1, 1);
+        sprint.addUserStory(test1);
+        test1.setStatus(Status.IN_PROGRESS);
+        List<UserStory> todo= sprint.getUserStoriesbyStatus(Status.TODO);
+        List<UserStory> inprogress= sprint.getUserStoriesbyStatus(Status.IN_PROGRESS);
+        List<UserStory> done= sprint.getUserStoriesbyStatus(Status.DONE);
+
+
+        Object[][]  progressRow = new Object[inprogress.size()][2];
+        for (int i = 0; i < inprogress.size(); i++) {
+            progressRow[i][0] = inprogress.get(i).getTitle();
+            progressRow[i][1] = "IN_PROGRESS";
+
+        }
         ProgressTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null}
-                },
+                progressRow,
                 new String [] {
                         "User Story", "Status"
                 }
@@ -342,7 +352,7 @@ public class DailyScrum extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DailyScrum().setVisible(true);
+                new DailyScrum(new SprintBacklog()).setVisible(true);
             }
         });
     }
