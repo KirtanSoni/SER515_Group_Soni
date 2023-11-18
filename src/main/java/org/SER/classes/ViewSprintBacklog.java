@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
+import java.util.List;
 
 /**
  *
@@ -272,7 +273,8 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
     /**
      * Creates new form ViewSprintBacklog
      */
-    public ViewSprintBacklog() {
+    public ViewSprintBacklog(SprintBacklog spbl) {
+        this.spbl = spbl;
         initComponents();
 //        backlogTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRenderEdit());
 //        backlogTable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditorEdit());
@@ -414,21 +416,19 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
         );
 
         backlogTable.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+
+        List<UserStory> Sp= spbl.getsprintBacklog();
+        Object[][] concatedStories = new Object[Sp.size()][4];
+        for(int i=0;i<Sp.size();i++){
+            UserStory userStory = Sp.get(i);
+            concatedStories[i][0] = userStory.getTitle();
+            concatedStories[i][1] = userStory.getBusinessValue();
+            concatedStories[i][2] = userStory.getDeveloperValue();
+            concatedStories[i][3] = "Delete";
+        }
+
         backlogTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
+                concatedStories,
                 new String [] {
                         "User Story", "Bsn.Value", "Story Pts", "Delete"
                 }
@@ -530,37 +530,37 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewSprintBacklog().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ViewSprintBacklog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ViewSprintBacklog().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify
     private JTable backlogTable;
