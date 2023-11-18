@@ -85,8 +85,9 @@ public class Login extends JFrame {
 
             if (isValidEmail(email)) {
                 if (isValidPassword(passwordChars)) {
-                    login(email, passwordChars);
-                } else {
+                    HomePage homepage = new HomePage();
+                    homepage.setVisible(true);
+                    this.dispose();                } else {
                     showMessageDialog("Invalid password");
                 }
             } else {
