@@ -151,7 +151,7 @@ public class DailyScrum extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daily Scrum");
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         jLabel1.setText("Daily Scrum");
 
 
@@ -196,6 +196,7 @@ public class DailyScrum extends javax.swing.JFrame {
         ProgressTable.setSelectionForeground(new java.awt.Color(255, 255, 255, 0));
         ProgressTable.setShowHorizontalLines(true);
         ProgressPanel.setViewportView(ProgressTable);
+        ProgressTable.setRowHeight(30);
         if (ProgressTable.getColumnModel().getColumnCount() > 0) {
             ProgressTable.getColumnModel().getColumn(1).setMinWidth(100);
             ProgressTable.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -222,6 +223,7 @@ public class DailyScrum extends javax.swing.JFrame {
         TodoTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TodoTable.setShowHorizontalLines(true);
         TodoPanel.setViewportView(TodoTable);
+        TodoTable.setRowHeight(30);
         if (TodoTable.getColumnModel().getColumnCount() > 0) {
             TodoTable.getColumnModel().getColumn(1).setMinWidth(100);
             TodoTable.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -246,6 +248,7 @@ public class DailyScrum extends javax.swing.JFrame {
         DoneTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         DoneTable.setShowHorizontalLines(true);
         DonePanel.setViewportView(DoneTable);
+        DoneTable.setRowHeight(30);
         if (DoneTable.getColumnModel().getColumnCount() > 0) {
             DoneTable.getColumnModel().getColumn(1).setMinWidth(100);
             DoneTable.getColumnModel().getColumn(1).setPreferredWidth(100);
