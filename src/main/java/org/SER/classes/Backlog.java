@@ -13,31 +13,29 @@ import java.util.List;
 
 public class Backlog extends JFrame {
 
-    private JPanel contentPane;
-    private JTable userStoryTable;
+    private final ProductBacklog productbacklog;
     private JScrollPane tableScrollPane;
 
     public Backlog(ProductBacklog productbacklog) {
-        List<UserStory> Userstories = productbacklog.getUserStories();
-        Object[][] concatedStories = new Object[Userstories.size()][5];
+        this.productbacklog = productbacklog;
 
-        for (int i = 0; i < Userstories.size(); i++) {
-            UserStory userStory = Userstories.get(i);
-            concatedStories[i][0] = userStory.getTitle() +":"+ userStory.getId();
+        List<UserStory> userStories = productbacklog.getUserStories();
+        Object[][] concatedStories = new Object[userStories.size()][5];
+
+        for (int i = 0; i < userStories.size(); i++) {
+            UserStory userStory = userStories.get(i);
+            concatedStories[i][0] = userStory.getTitle() + ":" + userStory.getId();
             concatedStories[i][1] = userStory.getBusinessValue();
             concatedStories[i][2] = userStory.getDeveloperValue();
             concatedStories[i][3] = "Edit";
             concatedStories[i][4] = "Delete";
         }
 
-        System.out.print(Arrays.deepToString(concatedStories));
-
-// Store the concatenated user stories in a new variable.
         setTitle("Product Backlog");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 800, 600);
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
@@ -51,15 +49,11 @@ public class Backlog extends JFrame {
 
         JButton addUserStoryButton = new JButton("Add User Story");
         addUserStoryButton.setFont(new Font("Calibri", Font.BOLD, 24));
-        addUserStoryButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddUserStory aus = new AddUserStory(productbacklog);
-                aus.setVisible(true);
-                contentPane.setVisible(false);
-                contentPane.setVisible(true);
-            }
+        addUserStoryButton.addActionListener(e -> {
+            AddUserStory aus = new AddUserStory(productbacklog);
+            aus.setVisible(true);
         });
-        titlePanel.add(Box.createHorizontalGlue()); // Add space to the right
+        titlePanel.add(Box.createHorizontalGlue());
         titlePanel.add(addUserStoryButton);
 
         contentPane.add(titlePanel, BorderLayout.NORTH);
@@ -73,12 +67,9 @@ public class Backlog extends JFrame {
                 return String.class;
             }
 
-            public boolean isCellEditable(int row, int column) {
-                return true; // Make all columns editable
-            }
         };
 
-        userStoryTable = new JTable(model) {
+        JTable userStoryTable = new JTable(model) {
             @Override
             public TableCellRenderer getCellRenderer(int row, int column) {
                 if (column == 3) {
@@ -92,9 +83,10 @@ public class Backlog extends JFrame {
             @Override
             public DefaultCellEditor getCellEditor(int row, int column) {
                 if (column == 3) {
-                    return new ButtonEditor(new JCheckBox(), "Edit");
+                    return new ButtonEditor(new JCheckBox(), "Edit", row) {
+                    };
                 } else if (column == 4) {
-                    return new ButtonEditor(new JCheckBox(), "Delete");
+                    return new ButtonEditor(new JCheckBox(), "Delete", row);
                 }
                 return (DefaultCellEditor) super.getCellEditor(row, column);
             }
@@ -103,12 +95,22 @@ public class Backlog extends JFrame {
         // Set the font for the entire table
         userStoryTable.setFont(new Font("Calibri", Font.PLAIN, 18));
 
-        tableScrollPane = new JScrollPane(userStoryTable);
+        JScrollPane tableScrollPane = new JScrollPane(userStoryTable);
         contentPane.add(tableScrollPane, BorderLayout.CENTER);
     }
 
-    // Inner class for ButtonRenderer
-    class ButtonRenderer extends JButton implements TableCellRenderer {
+    private void editUserStory(int row) {
+        UserStory selectedUserStory = getUserStoryFromRow(row);
+        EditUserStoryModal editModal = new EditUserStoryModal(selectedUserStory);
+        editModal.setVisible(true);
+    }
+
+    private UserStory getUserStoryFromRow(int row) {
+        List<UserStory> userStories = productbacklog.getUserStories();
+        return userStories.get(row);
+    }
+
+    static class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer(String label) {
             setOpaque(true);
             setText(label);
@@ -123,15 +125,17 @@ public class Backlog extends JFrame {
     // Inner class for ButtonEditor
     class ButtonEditor extends DefaultCellEditor {
         protected JButton button;
-        private boolean isPushed;
+        private final int row;
 
-        public ButtonEditor(JCheckBox checkBox, String label) {
+        public ButtonEditor(JCheckBox checkBox, String label, int row) {
             super(checkBox);
+            this.row = row;
             button = new JButton(label);
             button.setOpaque(true);
             button.addActionListener(e -> fireEditingStopped());
         }
 
+        @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
@@ -140,21 +144,80 @@ public class Backlog extends JFrame {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
             }
-            isPushed = true;
             return button;
         }
 
+        @Override
         public Object getCellEditorValue() {
             isPushed = false;
             return button.getText();
         }
+
+        @Override
+        public void fireEditingStopped() {
+            super.fireEditingStopped();
+            editUserStory(row);
+        }
     }
+}
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-//            Backlog backlogFrame = new Backlog(new Object[][]{}); // Initialize with an empty array or provide dynamic data
-//            backlogFrame.setVisible(true);
+class EditUserStoryModal extends JDialog {
+    private final JTextField titleField;
+    private final JTextField businessValueField;
+    private final JTextField developerValueField;
 
+    // Store the original values
+    private final String oldTitle;
+    private final int oldBusinessValue;
+    private final int oldDeveloperValue;
+
+    public EditUserStoryModal(UserStory userStory) {
+        // Capture the original values
+        this.oldTitle = userStory.getTitle();
+        this.oldBusinessValue = userStory.getBusinessValue();
+        this.oldDeveloperValue = userStory.getDeveloperValue();
+
+        setTitle("Edit User Story");
+        setSize(300, 200);
+        setLayout(new GridLayout(4, 2));
+
+        JLabel titleLabel = new JLabel("Title:");
+        titleField = new JTextField(userStory.getTitle());
+        JLabel businessValueLabel = new JLabel("Business Value:");
+        businessValueField = new JTextField(String.valueOf(userStory.getBusinessValue()));
+        JLabel developerValueLabel = new JLabel("Developer Value:");
+        developerValueField = new JTextField(String.valueOf(userStory.getDeveloperValue()));
+
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(e -> {
+            // Update the UserStory object with edited values
+            userStory.setTitle(titleField.getText());
+            userStory.setBusinessValue(Integer.parseInt(businessValueField.getText()));
+            userStory.setDeveloperValue(Integer.parseInt(developerValueField.getText()));
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+            // Calculate the center position
+            int x = (screenSize.width - getWidth()) / 2;
+            int y = (screenSize.height - getHeight()) / 2;
+
+            // Set the location
+            // Print both old and new values
+            System.out.println("Old Values: Title = " + oldTitle + ", Business Value = " + oldBusinessValue + ", Developer Value = " + oldDeveloperValue);
+            System.out.println("New Values: Title = " + userStory.getTitle() + ", Business Value = " + userStory.getBusinessValue() + ", Developer Value = " + userStory.getDeveloperValue());
+
+            // Close the modal
+            setLocation(x, y);
+
+            dispose();
         });
+
+        add(titleLabel);
+        add(titleField);
+        add(businessValueLabel);
+        add(businessValueField);
+        add(developerValueLabel);
+        add(developerValueField);
+        add(new JLabel()); // Empty space
+        add(saveButton);
     }
 }
