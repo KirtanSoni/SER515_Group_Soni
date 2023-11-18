@@ -16,8 +16,10 @@ public class Backlog extends JFrame {
     private JPanel contentPane;
     private JTable userStoryTable;
     private JScrollPane tableScrollPane;
+    private SprintBacklog sp;
 
-    public Backlog(ProductBacklog productbacklog) {
+    public Backlog(ProductBacklog productbacklog, SprintBacklog sp) {
+        this.sp = sp;
         List<UserStory> Userstories = productbacklog.getUserStories();
         Object[][] concatedStories = new Object[Userstories.size()][5];
 
@@ -26,7 +28,7 @@ public class Backlog extends JFrame {
             concatedStories[i][0] = userStory.getTitle() +":"+ userStory.getId();
             concatedStories[i][1] = userStory.getBusinessValue();
             concatedStories[i][2] = userStory.getDeveloperValue();
-            concatedStories[i][3] = "Move";
+            concatedStories[i][3] = userStory.getId();
             concatedStories[i][4] = "Delete";
         }
 
@@ -92,6 +94,8 @@ public class Backlog extends JFrame {
             @Override
             public DefaultCellEditor getCellEditor(int row, int column) {
                 if (column == 3) {
+                    System.out.println(productbacklog.getUserStories().get(row));
+                    Helpers.Move(productbacklog.getUserStories().get(row),productbacklog,sp);
                     return new ButtonEditor(new JCheckBox(), "Move");
                 } else if (column == 4) {
                     return new ButtonEditor(new JCheckBox(), "Delete");
@@ -148,6 +152,12 @@ public class Backlog extends JFrame {
         public Object getCellEditorValue() {
             isPushed = false;
             return button.getText();
+        }
+        @Override
+        public void fireEditingStopped() {
+            super.fireEditingStopped();
+            Helpers helpers = new Helpers();
+            System.out.println(this.getCellEditorValue().toString());
         }
     }
 

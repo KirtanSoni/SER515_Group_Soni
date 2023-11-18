@@ -63,7 +63,7 @@ public class HomePage extends JFrame {
         btnProductBacklogButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                JOptionPane.showMessageDialog(btnProductBacklogButton, "Under Development");
-                Backlog bl = new Backlog(pdbl);
+                Backlog bl = new Backlog(pdbl, spbl);
                 bl.setVisible(true);
             }
         });
