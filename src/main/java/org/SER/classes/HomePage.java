@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -22,6 +23,7 @@ public class HomePage extends JFrame {
 
     private JPanel contentPane;
     public ProductBacklog pdbl = new ProductBacklog();
+    public SprintBacklog spbl = new SprintBacklog();
 
     /**
      * Launch the application.
@@ -70,7 +72,9 @@ public class HomePage extends JFrame {
         JButton btnDailyScrum = new JButton("Daily Scrum");
         btnDailyScrum.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnDailyScrum, "Under Development");
+                //JOptionPane.showMessageDialog(btnDailyScrum, "Under Development");
+                DailyScrum ds = new DailyScrum(spbl);
+                ds.setVisible(true);
             }
         });
         btnDailyScrum.setFont(new Font("Calibri", Font.BOLD, 18));

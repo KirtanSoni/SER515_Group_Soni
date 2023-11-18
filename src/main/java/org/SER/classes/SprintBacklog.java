@@ -23,7 +23,7 @@ public class SprintBacklog {
 
 
 // Get SprintBacklog
-    public List<UserStory> sprintBacklog(){
+    public List<UserStory> getsprintBacklog(){
         return this.sprintBacklog;
     }
 
@@ -55,6 +55,10 @@ public class SprintBacklog {
         UserStory userStory = UserStory.getUserStory(this.sprintBacklog, id);
         userStory.setStatus(status);
     }
+
+    public void PushChangetoDatabase(int id,Status prev,Status curr){
+
+    }
 // progress
     public int getProgress(){
         int progress = 0;
@@ -79,6 +83,15 @@ public class SprintBacklog {
             userStory.setStatus(Status.TODO);
         }
         this.sprintBacklog.addAll(userStories);
+    }
+    public List<UserStory> getUserStoriesbyStatus(Status status){
+        List<UserStory> userStories = new ArrayList<UserStory>();
+        for(UserStory userStory : this.sprintBacklog){
+            if(userStory.getStatus() == status){
+                userStories.add(userStory);
+            }
+        }
+        return userStories;
     }
 // remove User story
     //make sure to handle Status if user story is not in the list

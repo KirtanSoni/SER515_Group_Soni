@@ -25,6 +25,16 @@ public class UserStory {
         this.DeveloperValue = developerValue;
     }
 
+    public UserStory(int id,String title, String description, String acceptanceCriteria, int businessValue, int developerValue){
+        this.id = id;
+        this.status = Status.NOT_ASSIGNED;
+        this.Title = title;
+        this.Description = description;
+        this.AcceptanceCriteria = acceptanceCriteria;
+        this.BusinessValue = businessValue;
+        this.DeveloperValue = developerValue;
+    }
+
 // Getters ---------------------------------------------------------
     public int getId(){
         return this.id;
