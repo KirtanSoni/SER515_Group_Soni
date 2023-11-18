@@ -218,7 +218,6 @@ public class DailyScrum extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TodoTable.setPreferredSize(new java.awt.Dimension(70, 40));
         TodoTable.setSelectionBackground(new java.awt.Color(102, 153, 0));
         TodoTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TodoTable.setShowHorizontalLines(true);
