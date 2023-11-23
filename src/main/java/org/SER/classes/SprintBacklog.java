@@ -102,6 +102,13 @@ public class SprintBacklog {
         this.sprintBacklog.remove(UserStory.getUserStory(this.sprintBacklog, id));
     }
 
+    public void moveUnfinishedToProductBacklog(ProductBacklog productBacklog) {
+        List<UserStory> unfinishedUserStories = getUserStoriesbyStatus(Status.TODO);
+        productBacklog.addUserStory(unfinishedUserStories);
+        // Remove unfinished user stories from sprint backlog
+        sprintBacklog.removeAll(unfinishedUserStories);
+    }
+
 }
 
 
