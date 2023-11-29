@@ -1,81 +1,93 @@
 package src.main.java.org.classes;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickUnit;
+import org.jfree.chart.axis.DateTickUnitType;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BurndownChart extends JFrame {
 
-    private List<Task> tasks;
-
-    public BurndownChart(String title, List<Task> tasks) {
+    public BurndownChart(String title, TimeSeriesData timeSeriesData) {
         super(title);
-        this.tasks = tasks;
 
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
+        TimeSeries series = new TimeSeries("Burndown");
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+        // Initialize with the provided data
+        series.add(new Day(timeSeriesData.getStartDate()), timeSeriesData.getInitialWork());
 
-        Graphics2D g2d = (Graphics2D) g;
-
-        int xOffset = 50;
-        int yOffset = 50;
-
-        // Draw X and Y axes
-        g2d.drawLine(xOffset, getHeight() - yOffset, getWidth() - xOffset, getHeight() - yOffset);
-        g2d.drawLine(xOffset, getHeight() - yOffset, xOffset, yOffset);
-
-        int totalTasks = tasks.size();
-        int xStep = (getWidth() - 2 * xOffset) / totalTasks;
-
-        // Draw tasks and progress lines
-        for (int i = 0; i < totalTasks; i++) {
-            int x = xOffset + i * xStep;
-            int remainingWork = tasks.get(i).getRemainingWork();
-            int y = getHeight() - yOffset - remainingWork;
-
-            // Draw the task rectangle
-            g2d.drawRect(x, y, xStep, remainingWork);
-
-            // Draw the progress line
-            if (i < totalTasks - 1) {
-                int nextX = xOffset + (i + 1) * xStep;
-                int nextY = getHeight() - yOffset - tasks.get(i + 1).getRemainingWork();
-                g2d.drawLine(x + xStep, y, nextX, nextY);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            List<Task> tasks = new ArrayList<>();
-            tasks.add(new Task(100));
-            tasks.add(new Task(80));
-            tasks.add(new Task(60));
-            tasks.add(new Task(40));
-            tasks.add(new Task(20));
-            tasks.add(new Task(0));
-
-            BurndownChart chart = new BurndownChart("Burndown Chart", tasks);
-        });
-    }
-
-    private static class Task {
-        private int remainingWork;
-
-        Task(int remainingWork) {
-            this.remainingWork = remainingWork;
+        // Adding more realistic sample data points
+        for (int i = 1; i <= timeSeriesData.getDays(); i++) {
+            Date date = new Date(timeSeriesData.getStartDate().getTime() + i * 24 * 60 * 60 * 1000);
+            int remainingWork = timeSeriesData.getInitialWork() - i * timeSeriesData.getWorkRatePerDay();
+            series.addOrUpdate(new Day(date), remainingWork);
         }
 
-        public int getRemainingWork() {
-            return remainingWork;
+        TimeSeriesCollection dataset = new TimeSeriesCollection(series);
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                "Burndown Chart",
+                "Time",
+                "Remaining Work",
+                dataset
+        );
+
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setDomainPannable(true);
+        plot.setRangePannable(true);
+
+        DateAxis domainAxis = new DateAxis("Time");
+        domainAxis.setDateFormatOverride(new SimpleDateFormat("MM-dd"));
+        domainAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1));
+        plot.setDomainAxis(domainAxis);
+
+        NumberAxis rangeAxis = new NumberAxis("Remaining Work");
+        plot.setRangeAxis(rangeAxis);
+
+        setLayout(new BorderLayout());
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(800, 600));
+        add(chartPanel, BorderLayout.CENTER);
+    }
+
+    // Data class to hold time series information
+    public static class TimeSeriesData {
+        private Date startDate;
+        private int initialWork;
+        private int workRatePerDay;
+        private int days;
+
+        public TimeSeriesData(Date startDate, int initialWork, int workRatePerDay, int days) {
+            this.startDate = startDate;
+            this.initialWork = initialWork;
+            this.workRatePerDay = workRatePerDay;
+            this.days = days;
+        }
+
+        public Date getStartDate() {
+            return startDate;
+        }
+
+        public int getInitialWork() {
+            return initialWork;
+        }
+
+        public int getWorkRatePerDay() {
+            return workRatePerDay;
+        }
+
+        public int getDays() {
+            return days;
         }
     }
 }
