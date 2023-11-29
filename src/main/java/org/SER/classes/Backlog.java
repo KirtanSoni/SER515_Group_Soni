@@ -1,10 +1,5 @@
 package org.SER.classes;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -117,28 +112,6 @@ public class Backlog extends JFrame {
         tableScrollPane = new JScrollPane(userStoryTable);
         contentPane.add(tableScrollPane, BorderLayout.CENTER);
     }
-
-//    private List<UserStory> getUserStoriesFromMongoDB() {
-//        List<UserStory> userStories = new ArrayList<>();
-//
-//        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/")) {
-//            MongoDatabase database = mongoClient.getDatabase("test");
-//            MongoCollection<Document> userStoryCollection = database.getCollection("UserStory");
-//
-//            for (Document document : userStoryCollection.find()) {
-//                UserStory userStory = new UserStory(
-//                        document.getString("title"),
-//                        document.getString("description"),
-//                        document.getString("acceptanceCriteria"),
-//                        document.getInteger("businessValue"),
-//                        document.getInteger("developerValue")
-//                );
-//                userStories.add(userStory);
-//            }
-//        }
-//
-//        return userStories;
-//    }
 
     // Inner class for ButtonRenderer
     class ButtonRenderer extends JButton implements TableCellRenderer {
