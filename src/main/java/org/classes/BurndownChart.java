@@ -3,41 +3,36 @@ package src.main.java.org.classes;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.DateTickUnit;
-import org.jfree.chart.axis.DateTickUnitType;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.time.Day;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class BurndownChart extends JFrame {
 
-    public BurndownChart(String title, TimeSeriesData timeSeriesData) {
+    public BurndownChart(String title, int[] workCompletedPercentages) {
         super(title);
 
-        TimeSeries series = new TimeSeries("Burndown");
+        XYSeries series = new XYSeries("Burndown");
 
-        // Initialize with the provided data
-        series.add(new Day(timeSeriesData.getStartDate()), timeSeriesData.getInitialWork());
+        // Initialize remaining work with the total work on the last day
+        int remainingWork = workCompletedPercentages[workCompletedPercentages.length - 1];
 
-        // Adding more realistic sample data points
-        for (int i = 1; i <= timeSeriesData.getDays(); i++) {
-            Date date = new Date(timeSeriesData.getStartDate().getTime() + i * 24 * 60 * 60 * 1000);
-            int remainingWork = timeSeriesData.getInitialWork() - i * timeSeriesData.getWorkRatePerDay();
-            series.addOrUpdate(new Day(date), remainingWork);
+        for (int i = 0; i < workCompletedPercentages.length; i++) {
+            int day = i + 1;  // Day count starts from 1
+            int workCompleted = workCompletedPercentages[i];
+            remainingWork -= workCompleted;  // Convert to remaining work
+            series.add(day, remainingWork);
         }
 
-        TimeSeriesCollection dataset = new TimeSeriesCollection(series);
-        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        JFreeChart chart = ChartFactory.createXYLineChart(
                 "Burndown Chart",
-                "Time",
+                "Days",
                 "Remaining Work",
                 dataset
         );
@@ -46,48 +41,24 @@ public class BurndownChart extends JFrame {
         plot.setDomainPannable(true);
         plot.setRangePannable(true);
 
-        DateAxis domainAxis = new DateAxis("Time");
-        domainAxis.setDateFormatOverride(new SimpleDateFormat("MM-dd"));
-        domainAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1));
+        NumberAxis domainAxis = new NumberAxis("Days");
+        int totalDataPoints = workCompletedPercentages.length;
+        domainAxis.setTickUnit(new NumberTickUnit(1));
+        domainAxis.setRange(1, totalDataPoints); // Set the range from 1 to the total number of data points
         plot.setDomainAxis(domainAxis);
 
+
+
+
         NumberAxis rangeAxis = new NumberAxis("Remaining Work");
+        rangeAxis.setRange(0, 100); // Set the range from 0 to 100
+        rangeAxis.setTickUnit(new NumberTickUnit(10)); // Set the tick unit to 10
         plot.setRangeAxis(rangeAxis);
+
 
         setLayout(new BorderLayout());
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(800, 600));
         add(chartPanel, BorderLayout.CENTER);
-    }
-
-    // Data class to hold time series information
-    public static class TimeSeriesData {
-        private Date startDate;
-        private int initialWork;
-        private int workRatePerDay;
-        private int days;
-
-        public TimeSeriesData(Date startDate, int initialWork, int workRatePerDay, int days) {
-            this.startDate = startDate;
-            this.initialWork = initialWork;
-            this.workRatePerDay = workRatePerDay;
-            this.days = days;
-        }
-
-        public Date getStartDate() {
-            return startDate;
-        }
-
-        public int getInitialWork() {
-            return initialWork;
-        }
-
-        public int getWorkRatePerDay() {
-            return workRatePerDay;
-        }
-
-        public int getDays() {
-            return days;
-        }
     }
 }

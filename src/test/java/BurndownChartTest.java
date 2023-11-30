@@ -1,10 +1,9 @@
 package src.test.java;
 
 import src.main.java.org.classes.BurndownChart;
-import src.main.java.org.classes.BurndownChart.TimeSeriesData;
 
+import javax.swing.*;
 import java.awt.EventQueue;
-import java.util.Date;
 
 public class BurndownChartTest implements ITest {
     public BurndownChartTest() {
@@ -19,15 +18,12 @@ public class BurndownChartTest implements ITest {
     private void testCase1() {
         EventQueue.invokeLater(() -> {
             try {
-                // Create a TimeSeriesData object with test values
-                TimeSeriesData testData = new TimeSeriesData(new Date(), 150, 20, 5);
-
                 // Create an instance of BurndownChart with the test data
-                BurndownChart burndownChart = new BurndownChart("Burndown Chart Test", testData);
+                BurndownChart burndownChart = new BurndownChart("Burndown Chart Test", new int[]{10, 20, 40,60,76,90,100});
 
-                // Display the chart
-                burndownChart.setSize(800, 600);
-                burndownChart.setLocationRelativeTo(null);
+                // Maximize the frame
+                burndownChart.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
                 burndownChart.setDefaultCloseOperation(BurndownChart.EXIT_ON_CLOSE);
                 burndownChart.setVisible(true);
 
