@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Login extends JFrame {
@@ -85,14 +86,12 @@ public class Login extends JFrame {
             String email = emailField.getText();
             char[] passwordChars = passwordField.getPassword();
 
-            if (isValidEmail(email)) {
-                if (isValidPassword(passwordChars)) {
-                    HomePage homepage = new HomePage();
-                    homepage.setVisible(true);
-                    this.dispose();                } else {
-
-                }
-                showMessageDialog("Invalid email address");
+            if (isValidEmail(email) && isValidPassword(passwordChars)) {
+                HomePage homepage = new HomePage();
+                homepage.setVisible(true);
+                this.dispose();
+            } else {
+                showMessageDialog("Invalid Credentials");
             }
         });
 
@@ -105,12 +104,12 @@ public class Login extends JFrame {
     }
 
     private boolean isValidEmail(String email) {
-        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-        return Pattern.compile(emailPattern).matcher(email).matches();
+        return (Objects.equals(email, "ser515@gmail.com"));
     }
 
     private boolean isValidPassword(char[] passwordChars) {
-        return passwordChars.length >= 8;
+        String inputPassword = new String(passwordChars);
+        return inputPassword.equals("12345");
     }
 
     private void login(String email, char[] passwordChars) {
