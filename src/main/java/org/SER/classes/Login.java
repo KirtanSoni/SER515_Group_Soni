@@ -115,17 +115,7 @@ public class Login extends JFrame {
     private void login(String email, char[] passwordChars) {
 
         String password = new String(passwordChars);
-        System.out.print("password");
-        System.out.println(password);
-//        userAuthentication.login(email, password);
-//        User currentUser = userAuthentication.getCurrentUser();
 
-//        if (currentUser != null) {
-//            System.out.println("Login successful. Welcome, " + currentUser.getUsername() + "!");
-//            // You can perform additional actions after successful login
-//        } else {
-//            showMessageDialog("Invalid login credentials.");
-//        }
     }
 
     private void showMessageDialog(String message) {
