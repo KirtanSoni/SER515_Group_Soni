@@ -38,5 +38,12 @@ public class Simulator {
                     sb.getUserStoriesbyStatus(Status.TODO).get(0).setStatus(Status.DONE);
             }
         }
+        //return to pb
+    }
+    public void run(ProductBacklog pb){
+      while(!pb.getUserStories().isEmpty()) {
+          SprintBacklog sb = simProductToSprint(pb);
+          makeProgress(sb);
+      }
     }
 }
