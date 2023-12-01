@@ -4,7 +4,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -14,51 +13,39 @@ import java.awt.*;
 
 public class BurndownChart extends JFrame {
 
-    public BurndownChart(String title, int[] workCompletedPercentages) {
+    public BurndownChart(String title, int[] workDone) {
         super(title);
 
-        XYSeries series = new XYSeries("Burndown");
+        int totalDays = workDone.length;
+        for (int i = 0; i < totalDays; i++) {
+            workDone[i] = 100 - workDone[i];
+        }
 
-        // Initialize remaining work with the total work on the last day
-        int remainingWork = workCompletedPercentages[workCompletedPercentages.length - 1];
+        XYSeries series = new XYSeries("Work Done");
 
-        for (int i = 0; i < workCompletedPercentages.length; i++) {
-            int day = i + 1;  // Day count starts from 1
-            int workCompleted = workCompletedPercentages[i];
-            remainingWork -= workCompleted;  // Convert to remaining work
-            series.add(day, remainingWork);
+        for (int day = 1; day <= totalDays; day++) {
+            series.add(day, workDone[day - 1]);
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Burndown Chart",
-                "Days",
-                "Remaining Work",
+                "Day",
+                "Work Remaining (%)",
                 dataset
         );
 
-        XYPlot plot = (XYPlot) chart.getPlot();
-        plot.setDomainPannable(true);
-        plot.setRangePannable(true);
+        XYPlot plot = chart.getXYPlot();
+        NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
+        NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
 
-        NumberAxis domainAxis = new NumberAxis("Days");
-        int totalDataPoints = workCompletedPercentages.length;
-        domainAxis.setTickUnit(new NumberTickUnit(1));
-        domainAxis.setRange(1, totalDataPoints); // Set the range from 1 to the total number of data points
-        plot.setDomainAxis(domainAxis);
+        yAxis.setRange(0, 100);
 
+        xAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
-
-
-        NumberAxis rangeAxis = new NumberAxis("Remaining Work");
-        rangeAxis.setRange(0, 100); // Set the range from 0 to 100
-        rangeAxis.setTickUnit(new NumberTickUnit(10)); // Set the tick unit to 10
-        plot.setRangeAxis(rangeAxis);
-
-
-        setLayout(new BorderLayout());
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(800, 600));
-        add(chartPanel, BorderLayout.CENTER);
+        chartPanel.setPreferredSize(new Dimension(560, 370));
+        setContentPane(chartPanel);
     }
 }

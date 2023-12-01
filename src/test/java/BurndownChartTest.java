@@ -18,8 +18,8 @@ public class BurndownChartTest implements ITest {
     private void testCase1() {
         EventQueue.invokeLater(() -> {
             try {
-                // Create an instance of BurndownChart with the test data
-                BurndownChart burndownChart = new BurndownChart("Burndown Chart Test", new int[]{10, 20, 40,60,76,90,100});
+                // Pass the test data array when creating an instance of BurndownChart
+                BurndownChart burndownChart = new BurndownChart("Burndown Chart Test", new int[]{10, 20, 40, 60, 76, 90, 100});
 
                 // Maximize the frame
                 burndownChart.setExtendedState(JFrame.MAXIMIZED_BOTH);
