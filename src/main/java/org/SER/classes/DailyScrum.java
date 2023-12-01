@@ -218,6 +218,7 @@ public class DailyScrum extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+
         TodoTable.setSelectionBackground(new java.awt.Color(102, 153, 0));
         TodoTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TodoTable.setShowHorizontalLines(true);
@@ -240,6 +241,7 @@ public class DailyScrum extends javax.swing.JFrame {
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                System.out.println("aaa");
                 return canEdit [columnIndex];
             }
         });
