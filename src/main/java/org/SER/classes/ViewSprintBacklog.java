@@ -285,10 +285,7 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
         endSprint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("End Sprint");
-
-
-                handleEndSprint();
+                    handleEndSprint();
             }
         });
         report.addActionListener(new ActionListener() {
