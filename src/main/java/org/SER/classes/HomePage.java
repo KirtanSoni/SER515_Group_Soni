@@ -62,6 +62,8 @@ public class HomePage extends JFrame {
         JButton btnProductBacklogButton = new JButton("Product Backlog");
         btnProductBacklogButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+//                List<UserStory> userStories = ScrumGame.viewProductBacklog();
+//                ProductBacklog productBacklog = new ProductBacklog(userStories);
 //                JOptionPane.showMessageDialog(btnProductBacklogButton, "Under Development");
                 Backlog bl = new Backlog(pdbl, spbl);
                 bl.setVisible(true);
