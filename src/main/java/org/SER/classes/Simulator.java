@@ -29,6 +29,7 @@ public class Simulator {
         }
         return sb;
     }
+
     public void makeProgress(SprintBacklog sb){
         for(int i =0 ; i< sprintLength;i++){
 
