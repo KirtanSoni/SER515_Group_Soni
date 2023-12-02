@@ -1,5 +1,12 @@
 package org.SER.classes;
 
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +15,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +28,7 @@ public class Backlog extends JFrame {
 
     public Backlog(ProductBacklog productbacklog, SprintBacklog sp) {
         this.sp = sp;
-        List<UserStory> Userstories = productbacklog.getUserStories();
+        List<UserStory> Userstories = getUserStoriesFromMongoDB();
         Object[][] concatedStories = new Object[Userstories.size()][5];
 
         for (int i = 0; i < Userstories.size(); i++) {
@@ -161,6 +169,31 @@ public class Backlog extends JFrame {
         }
     }
 
+    private List<UserStory> getUserStoriesFromMongoDB() {
+        List<UserStory> userStories = new ArrayList<>();
+
+        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/")) {
+            MongoDatabase database = mongoClient.getDatabase("ScrumSimulator");
+            MongoCollection<Document> userStoryCollection = database.getCollection("ProductBacklog");
+
+            for (Document document : userStoryCollection.find()) {
+                UserStory userStory = new UserStory(
+//                        document.getInteger("id"),
+                        document.getString("title"),
+                        document.getString("description"),
+                        document.getString("acceptanceCriteria"),
+                        document.getInteger("businessValue"),
+                        document.getInteger("developerValue")
+                );
+                userStories.add(userStory);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exception appropriately (e.g., log it or show an error message)
+        }
+
+        return userStories;
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
 //            Backlog backlogFrame = new Backlog(new Object[][]{}); // Initialize with an empty array or provide dynamic data

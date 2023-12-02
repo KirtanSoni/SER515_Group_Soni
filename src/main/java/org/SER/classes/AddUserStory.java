@@ -1,5 +1,11 @@
 package org.SER.classes;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -31,6 +37,7 @@ public class AddUserStory extends JFrame {
     public String accept = new String();
     public int bv;
     public int dv;
+    public int uid;
 
 
     /**
@@ -235,7 +242,20 @@ public class AddUserStory extends JFrame {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserStory us = new UserStory(tit, desc, accept, bv, dv);
+                UserStory us = new UserStory(uid, tit, desc, accept, bv, dv);
+                MongoClient mongoClient = MongoClients.create("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/");
+                MongoDatabase database = mongoClient.getDatabase("ScrumSimulator");
+                MongoCollection<Document> collection = database.getCollection("ProductBacklog");
+
+                Document userStoryDocument = new Document();
+                userStoryDocument.put("id", uid);
+                userStoryDocument.put("title", tit);
+                userStoryDocument.put("description", desc);
+                userStoryDocument.put("acceptanceCriteria", accept);
+                userStoryDocument.put("businessValue", bv);
+                userStoryDocument.put("developerValue", dv);
+
+//                collection.insertOne(userStoryDocument);
 //                System.out.println(us);
                 productBacklog.addUserStory(us);
                 dispose();
