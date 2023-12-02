@@ -255,7 +255,7 @@ public class AddUserStory extends JFrame {
                 userStoryDocument.put("businessValue", bv);
                 userStoryDocument.put("developerValue", dv);
 
-                collection.insertOne(userStoryDocument);
+//                collection.insertOne(userStoryDocument);
 //                System.out.println(us);
                 productBacklog.addUserStory(us);
                 dispose();
