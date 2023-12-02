@@ -98,6 +98,7 @@ public class HomePage extends JFrame {
 
             }
         });
+
         btnNewButton.setFont(new Font("Calibri", Font.BOLD, 18));
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
