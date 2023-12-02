@@ -55,7 +55,7 @@ public class Simulator {
         for(int i =0 ; i< sprintLength;i++){
 
             for(int j = 0 ; j < players;j++){
-                int rand = new Random().nextInt(10);
+                int rand = new Random().nextInt(5);
                 if(sb.getUserStoriesbyStatus(Status.TODO).size()!=0){
 
                     if(rand == 0){
