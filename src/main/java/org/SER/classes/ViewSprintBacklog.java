@@ -403,6 +403,8 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
+
+                System.out.println(rowIndex);
                 return canEdit [columnIndex];
             }
         });
@@ -480,6 +482,7 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                System.out.println(rowIndex);
                 return canEdit [columnIndex];
             }
         });

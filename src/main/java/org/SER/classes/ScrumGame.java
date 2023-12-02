@@ -21,5 +21,10 @@ public class ScrumGame {
         });
     }
 
+    public void simulateGame(){
+        Simulator sim = new Simulator(10, 3, 10);
+        sim.run(this.productbacklog);
+    }
+
 
 }
