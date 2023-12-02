@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
@@ -280,10 +282,36 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
 //        backlogTable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditorEdit());
         backlogTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRenderDelete());
         backlogTable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditorDelete());
-//        UIManager.put("progress.selectionBackground",Color.BLUE);
-//        UIManager.put("progress.selectionForeground",Color.WHITE);
+        endSprint.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    handleEndSprint();
+            }
+        });
+        report.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleReport();
+            }
+        });
     }
 
+    private void handleEndSprint() {
+        System.out.println("end sprint");
+    }
+    private void handleReport() {
+        // Add your logic here for handling the end of the sprint
+        int[] workDone = {10, 50, 60, 70, 90,100};
+
+        // For example, you can update the UI, perform calculations, etc.
+        SwingUtilities.invokeLater(() -> {
+            BurndownChart burndownChart = new BurndownChart("Burndown Chart", workDone);
+            burndownChart.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // Change this line
+            burndownChart.pack();
+            burndownChart.setLocationRelativeTo(null);
+            burndownChart.setVisible(true);
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -291,12 +319,14 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
         sprintBacklogLabel = new javax.swing.JLabel();
         progress = new javax.swing.JProgressBar();
         result = new JButton();
+        endSprint = new JButton();
         report = new JButton();
         jPanel1 = new javax.swing.JPanel();
         startLabel = new javax.swing.JLabel();
@@ -325,6 +355,11 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
         result.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         result.setLabel("Result");
         result.setOpaque(true);
+
+        endSprint.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        endSprint.setLabel("End Sprint");
+        endSprint.setOpaque(true);
+
 
         report.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         report.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -480,6 +515,8 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(endSprint, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(report, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(mainPanelLayout.createSequentialGroup()
                                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
@@ -504,6 +541,7 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
                                                                         .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                 .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(endSprint, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(report, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -575,6 +613,8 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
     private javax.swing.JProgressBar progress;
     private JButton report;
     private JButton result;
+
+    private JButton endSprint;
     private javax.swing.JLabel sprintBacklogLabel;
     private javax.swing.JTextField startDate;
     private javax.swing.JLabel startLabel;
