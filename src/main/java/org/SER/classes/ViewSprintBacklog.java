@@ -353,7 +353,7 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
 
         progress.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
         progress.setForeground(new Color(0, 102, 204));
-        progress.setValue(70);
+        progress.setValue(spbl.getProgress());
         progress.setStringPainted(true);
 
         result.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

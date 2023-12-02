@@ -2,6 +2,8 @@ package org.SER.classes;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
@@ -14,6 +16,12 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class DailyScrum extends javax.swing.JFrame {
 
+    int move1=-1;
+    int move2=-1;
+    SprintBacklog spbl;
+    List<UserStory> todo;
+    List<UserStory> inprogress;
+    List<UserStory> done;
     /**
      * Creates new form DailyScrum
      */
@@ -23,7 +31,7 @@ public class DailyScrum extends javax.swing.JFrame {
         public Component getTableCellRendererComponent(JTable table, Object o, boolean isSelected, boolean hasFocus, int row, int column) {
             Component com = super.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
 
-            PanelActionDropDown action =  new PanelActionDropDown();
+            PanelActionMove action =  new PanelActionMove();
 
             if(isSelected==false && row%2==0){
                 action.setBackground(Color.WHITE);
@@ -48,7 +56,7 @@ public class DailyScrum extends javax.swing.JFrame {
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
-            PanelActionDropDown action = new PanelActionDropDown();
+            PanelActionMove action = new PanelActionMove();
             action.setBackground(table.getSelectionBackground());
             return action;
         }
@@ -56,14 +64,17 @@ public class DailyScrum extends javax.swing.JFrame {
 
 
     }
-    public class PanelActionDropDown extends javax.swing.JPanel {
+
+
+    public class PanelActionMove extends javax.swing.JPanel {
 
         /**
          * Creates new form PanelAction2
          */
-        public PanelActionDropDown() {
+        public PanelActionMove() {
             initComponents();
         }
+
 
         /**
          * This method is called from within the constructor to initialize the form.
@@ -74,17 +85,25 @@ public class DailyScrum extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">
         private void initComponents() {
 
-            jComboBox1 = new javax.swing.JComboBox<>();
+            jButton1 = new javax.swing.JButton();
 
             setAlignmentX(0.0F);
             setAlignmentY(0.0F);
             setPreferredSize(new java.awt.Dimension(51, 21));
 
-            jComboBox1.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--UPDATE--", "TODO", "IN_PROGRESS", "DONE", " " }));
-            jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jComboBox1ActionPerformed(evt);
+            jButton1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+            jButton1.setText("Move");
+
+            jButton1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    move1 = TodoTable.getSelectedRow();
+                    move2 = ProgressTable.getSelectedRow();
+                    if(move1>-1){
+                        todo.get(TodoTable.getSelectedRow()).setStatus(Status.IN_PROGRESS);
+                    }
+                    if(move2>-1){
+                        inprogress.get(ProgressTable.getSelectedRow()).setStatus(Status.DONE);
+                    }
                 }
             });
 
@@ -93,29 +112,20 @@ public class DailyScrum extends javax.swing.JFrame {
             layout.setHorizontalGroup(
                     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jComboBox1, 0, 76, Short.MAX_VALUE)
-                                    .addContainerGap())
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))
             );
             layout.setVerticalGroup(
                     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
         }// </editor-fold>
 
-        private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
-//            System.out.println(jComboBox1.get);
-
-        }
-
 
         // Variables declaration - do not modify
-        private javax.swing.JComboBox<String> jComboBox1;
+        private javax.swing.JButton jButton1;
         // End of variables declaration
     }
-
 
     public DailyScrum(SprintBacklog sprint) {
         initComponents(sprint);
@@ -147,6 +157,10 @@ public class DailyScrum extends javax.swing.JFrame {
         progressLabel = new javax.swing.JLabel();
         todoLabel = new javax.swing.JLabel();
         doneLabel = new javax.swing.JLabel();
+        spbl = sprint;
+        todo = sprint.getUserStoriesbyStatus(Status.TODO);
+        inprogress = sprint.getUserStoriesbyStatus(Status.IN_PROGRESS);
+        done = sprint.getUserStoriesbyStatus(Status.DONE);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daily Scrum");
@@ -155,9 +169,7 @@ public class DailyScrum extends javax.swing.JFrame {
         jLabel1.setText("Daily Scrum");
 
 
-        List<UserStory> todo= sprint.getUserStoriesbyStatus(Status.TODO);
-        List<UserStory> inprogress= sprint.getUserStoriesbyStatus(Status.IN_PROGRESS);
-        List<UserStory> done= sprint.getUserStoriesbyStatus(Status.DONE);
+
 
         Object[][]  todoRow = new Object[todo.size()][2];
         for (int i = 0; i < todo.size(); i++) {
@@ -224,6 +236,7 @@ public class DailyScrum extends javax.swing.JFrame {
         TodoTable.setShowHorizontalLines(true);
         TodoPanel.setViewportView(TodoTable);
         TodoTable.setRowHeight(30);
+//        TodoTable.getSelectedRow();
         if (TodoTable.getColumnModel().getColumnCount() > 0) {
             TodoTable.getColumnModel().getColumn(1).setMinWidth(100);
             TodoTable.getColumnModel().getColumn(1).setPreferredWidth(100);
