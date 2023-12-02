@@ -18,6 +18,7 @@ import java.util.List;
 public class ViewSprintBacklog extends javax.swing.JFrame {
     SprintBacklog spbl;
     ProductBacklog pdbl;
+    List<Integer> charts;
 
 //    public class TableActionCellRenderEdit extends DefaultTableCellRenderer {
 //
@@ -58,6 +59,9 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
 
 
 
+    }
+    void setCharts(List<Integer> charts){
+        this.charts = charts;
     }
 //    public class TableActionCellEditorEdit extends DefaultCellEditor{
 //
@@ -305,7 +309,10 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
     }
     private void handleReport() {
         // Add your logic here for handling the end of the sprint
-        int[] workDone = {10, 50, 60, 70, 90,100};
+        int[] workDone = new int[charts.size()];
+        for(int i = 0 ; i < charts.size();i++){
+            workDone[i] = charts.get(i);
+        }
 
         // For example, you can update the UI, perform calculations, etc.
         SwingUtilities.invokeLater(() -> {
@@ -353,7 +360,7 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
 
         progress.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
         progress.setForeground(new Color(0, 102, 204));
-        progress.setValue(spbl.getProgress());
+        progress.setValue(spbl.getProgress());// spbl.getProgress());
         progress.setStringPainted(true);
 
         result.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

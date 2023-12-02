@@ -1,21 +1,30 @@
 package org.SER.classes;
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author monil
  */
 public class SimAgent extends javax.swing.JFrame {
 
+
+
+    int sprintLength;
+    int sprintVelocity;
+    int players;
+    ProductBacklog productbacklog ;
     /**
      * Creates new form SimAgent
      */
-    public SimAgent() {
+    public SimAgent(ProductBacklog productbacklog) {
+        this.productbacklog = productbacklog;
         getContentPane().setFont(new Font("Calibri", Font.PLAIN, 10));
         initComponents();
     }
@@ -51,7 +60,10 @@ public class SimAgent extends javax.swing.JFrame {
         jLabel4.setText("Sprint Velocity :");
 
         jTextField3.setToolTipText("Enter a number");
+
+
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
@@ -62,6 +74,13 @@ public class SimAgent extends javax.swing.JFrame {
         btnNewButton = new JButton("Submit");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                sprintVelocity = Integer.parseInt(jTextField3.getText());
+                players  = Integer.parseInt(jTextField1.getText());
+                sprintLength = Integer.parseInt(jTextField2.getText());
+                System.out.println(sprintVelocity+" "+players+" "+sprintLength);
+                    Simulator sim = new Simulator(sprintVelocity, players, sprintLength);
+                    sim.setPb(productbacklog);
+                    sim.run();
 
                 dispose();
             }
@@ -151,11 +170,11 @@ public class SimAgent extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SimAgent().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SimAgent().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify

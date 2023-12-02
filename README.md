@@ -58,21 +58,26 @@ Follow these instructions to get a copy of the project up and running on your lo
    sh run.sh
    ```
 
-```bash
-   mvn test
-   start target/surefire-reports/index.html  # For Windows
-   open target/surefire-reports/index.html  # For macOS
-```
-
 2. Run the Application through SwingUI:
 
     ```bash
+   mvn clean install
    java -cp "target/classes:lib/*" org.SER.classes.ScrumGame
     ```
 
+## UserId and Password inside the Application
+
+```
+Username: ser515@gmail.com
+password: 12345
+```
+
+
+
+
 ## Contributing
 
-- Kirtan Soni (Team Leader)
+- Kirtan Soni 
 - Shubham Shah
 - Monil Prajapati
 - Janmay Bhatt

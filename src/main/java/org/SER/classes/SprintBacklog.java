@@ -1,9 +1,11 @@
 package org.SER.classes;
 
+import java.awt.color.ICC_ColorSpace;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SprintBacklog {
+    static public int _COUNTER = 0;
     private boolean isComplete = false;
     private List<UserStory> sprintBacklog = new ArrayList<UserStory>();
     private int backlogVelocity;
@@ -25,6 +27,7 @@ public class SprintBacklog {
 
     // Get SprintBacklog
     public List<UserStory> getsprintBacklog() {
+          _COUNTER = Math.max(_COUNTER,getProgress() );
         return this.sprintBacklog;
     }
 
@@ -115,9 +118,10 @@ public class SprintBacklog {
     }
   public void transferUnusedUserStories(ProductBacklog productBacklog) {
         List<UserStory> unusedUserStories = new ArrayList<>();
-
+        _COUNTER = 0;
         for (UserStory userStory : this.sprintBacklog) {
             if (!productBacklog.getUserStories().contains(userStory)) {
+                userStory.setStatus(Status.NOT_ASSIGNED);
                 unusedUserStories.add(userStory);
             }
         }

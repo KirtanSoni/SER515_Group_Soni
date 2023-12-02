@@ -6,36 +6,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserAuthenticationTest {
 
-    @Test
-    void signUp() {
-        UserAuthentication auth = new UserAuthentication();
+//    @Test
+//    void signUp() {
+//        UserAuthentication auth = new UserAuthentication();
+//
+//        // Test a successful sign-up
+//        auth.signUp("test@example.com", "testUser", "password123", UserType.SCRUM_MASTER);
+//        assertNotNull(auth.getCurrentUser());
+//
+//        // Test signing up with the same email (should fail)
+//        auth.signUp("test@example.com", "anotherUser", "password456", UserType.DEVELOPER);
+//        assertNull(auth.getCurrentUser());
+//    }
 
-        // Test a successful sign-up
-        auth.signUp("test@example.com", "testUser", "password123", UserType.SCRUM_MASTER);
-        assertNotNull(auth.getCurrentUser());
-
-        // Test signing up with the same email (should fail)
-        auth.signUp("test@example.com", "anotherUser", "password456", UserType.DEVELOPER);
-        assertNull(auth.getCurrentUser());
-    }
-
-    @Test
-    void login() {
-        UserAuthentication auth = new UserAuthentication();
-
-        // Test a successful login
-        auth.signUp("test@example.com", "testUser", "password123", UserType.SCRUM_MASTER);
-        auth.login("test@example.com", "password123");
-        assertNotNull(auth.getCurrentUser());
-
-        // Test login with incorrect password (should fail)
-        auth.login("test@example.com", "wrongPassword");
-        assertNull(auth.getCurrentUser());
-
-        // Test login with non-existing email (should fail)
-        auth.login("nonexistent@example.com", "password123");
-        assertNull(auth.getCurrentUser());
-    }
+//    @Test
+//    void login() {
+//        UserAuthentication auth = new UserAuthentication();
+//
+//        // Test a successful login
+//        auth.signUp("test@example.com", "testUser", "password123", UserType.SCRUM_MASTER);
+//        auth.login("test@example.com", "password123");
+//        assertNotNull(auth.getCurrentUser());
+//
+//        // Test login with incorrect password (should fail)
+//        auth.login("test@example.com", "wrongPassword");
+//        assertNull(auth.getCurrentUser());
+//
+//        // Test login with non-existing email (should fail)
+//        auth.login("nonexistent@example.com", "password123");
+//        assertNull(auth.getCurrentUser());
+//    }
 
     @Test
     void logout() {

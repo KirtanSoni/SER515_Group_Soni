@@ -101,7 +101,7 @@ public class HomePage extends JFrame {
         JButton btnNewButton = new JButton("Simulator Agent");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SimAgent sa = new SimAgent();
+                SimAgent sa = new SimAgent(pdbl);
                 sa.setVisible(true);
 
             }
