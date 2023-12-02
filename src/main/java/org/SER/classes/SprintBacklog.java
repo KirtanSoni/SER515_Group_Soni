@@ -112,7 +112,22 @@ public class SprintBacklog {
 
     public void removeUserStory(int id) {
         this.sprintBacklog.remove(UserStory.getUserStory(this.sprintBacklog, id));
-
     }
+  public void transferUnusedUserStories(ProductBacklog productBacklog) {
+        List<UserStory> unusedUserStories = new ArrayList<>();
+
+        for (UserStory userStory : this.sprintBacklog) {
+            if (!productBacklog.getUserStories().contains(userStory)) {
+                unusedUserStories.add(userStory);
+            }
+        }
+
+        this.sprintBacklog.removeAll(unusedUserStories);
+        productBacklog.addUserStory(unusedUserStories);
+    }
+
+
+
+    
 }
 
