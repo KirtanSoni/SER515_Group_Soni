@@ -104,7 +104,7 @@ public class Login extends JFrame {
     }
 
     private boolean isValidEmail(String email) {
-        return (Objects.equals(email, "ser515@gmail.com"));
+        return (email.equals("ser515@gmail.com"));
     }
 
     private boolean isValidPassword(char[] passwordChars) {

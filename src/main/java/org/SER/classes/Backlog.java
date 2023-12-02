@@ -28,7 +28,7 @@ public class Backlog extends JFrame {
 
     public Backlog(ProductBacklog productbacklog, SprintBacklog sp) {
         this.sp = sp;
-        List<UserStory> Userstories = getUserStoriesFromMongoDB();
+        List<UserStory> Userstories = productbacklog.getUserStories();
         Object[][] concatedStories = new Object[Userstories.size()][5];
 
         for (int i = 0; i < Userstories.size(); i++) {
@@ -169,7 +169,7 @@ public class Backlog extends JFrame {
         }
     }
 
-    private List<UserStory> getUserStoriesFromMongoDB() {
+    public static List<UserStory> getUserStoriesFromMongoDB() {
         List<UserStory> userStories = new ArrayList<>();
 
         try (MongoClient mongoClient = MongoClients.create("mongodb+srv://sshah232:ye6yVTzEYA3WdBVj@scrumsimulator.nuu1fks.mongodb.net/")) {

@@ -1,2 +1,3 @@
 mvn clean install
-java -cp target/classes org.SER.classes.ScrumGame
+java -cp "target/classes:lib/*" org.SER.classes.ScrumGame
+

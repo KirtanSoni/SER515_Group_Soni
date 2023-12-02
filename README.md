@@ -67,7 +67,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 2. Run the Application through SwingUI:
 
     ```bash
-    java -jar target/scrum-simulator.jar
+   java -cp "target/classes:lib/*" org.SER.classes.ScrumGame
     ```
 
 ## Contributing

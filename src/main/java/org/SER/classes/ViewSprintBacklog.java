@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class ViewSprintBacklog extends javax.swing.JFrame {
     SprintBacklog spbl;
+    ProductBacklog pdbl;
 
 //    public class TableActionCellRenderEdit extends DefaultTableCellRenderer {
 //
@@ -35,6 +36,9 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
 //    }
     public void setSprintBacklog(SprintBacklog s){
         this.spbl = s;
+    }
+    public void setProductBacklog(ProductBacklog p){
+        this.pdbl = p;
     }
     public class TableActionCellRenderDelete extends DefaultTableCellRenderer {
 
@@ -297,7 +301,7 @@ public class ViewSprintBacklog extends javax.swing.JFrame {
     }
 
     private void handleEndSprint() {
-        System.out.println("end sprint");
+        spbl.transferUnusedUserStories(pdbl);
     }
     private void handleReport() {
         // Add your logic here for handling the end of the sprint

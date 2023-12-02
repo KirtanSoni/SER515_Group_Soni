@@ -25,14 +25,19 @@ public class HomePage extends JFrame {
     public ProductBacklog pdbl = new ProductBacklog();
     public SprintBacklog spbl = new SprintBacklog();
 
+    void fetchProductBacklog() {
+        pdbl.addUserStory(Backlog.getUserStoriesFromMongoDB());
+    }
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     HomePage frame = new HomePage();
+
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -44,6 +49,7 @@ public class HomePage extends JFrame {
      * Create the frame.
      */
     public HomePage() {
+        fetchProductBacklog();
         setTitle("Home Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //      setExtendedState(JFrame.MAXIMIZED_BOTH);              // Full-screen
@@ -86,7 +92,7 @@ public class HomePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
 //                JOptionPane.showMessageDialog(btnSprintBacklog, "Under Development");
                 ViewSprintBacklog sb = new ViewSprintBacklog(spbl);
-
+                sb.setProductBacklog(pdbl);
                 sb.setVisible(true);
             }
         });
